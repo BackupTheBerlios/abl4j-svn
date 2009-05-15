@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editmodel:ClassDiagramEditModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:editmodel="editmodel.xmi" xmlns:options="options.xmi" size="1378,875" id="org.schwiebert.abl4j.align.methods" metadata="uml2-1.0" initialized="true" tag="1000" key="32303037303533312D313030302041424C344A2F7374657068616E">
+  <children xsi:type="editmodel:ClassEditModel" name="RightAlignmentMethod" location="680,195" size="163,85" id="org.schwiebert.abl4j.align.methods/RightAlignmentMethod" runTimeClassModel="handleEditOperationStructure(Lorg.schwiebert.abl4j.data.ITreeBank;Lorg.schwiebert.abl4j.data.ITree;),setProperties(Lorg.schwiebert.abl4j.util.PropertiesMap;)">
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="137,36">
+      <children xsi:type="editmodel:MethodEditModel" name="handleEditOperationStructure" id="org.schwiebert.abl4j.align.methods/RightAlignmentMethod#handleEditOperationStructure(Lorg.schwiebert.abl4j.data.ITreeBank;Lorg.schwiebert.abl4j.data.ITree;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="setProperties" id="org.schwiebert.abl4j.align.methods/RightAlignmentMethod#setProperties(Lorg.schwiebert.abl4j.util.PropertiesMap;)"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <sourceConnections xsi:type="editmodel:GeneralizationEditModel" autoLocated="true" id="org.schwiebert.abl4j.align.methods/AlignmentMethod&lt;-org.schwiebert.abl4j.align.methods/RightAlignmentMethod" source="//@children.0" target="//@children.2/@sourceConnections.0" targetEnd="//@children.0/@sourceConnections.0/@children.1" sourceEnd="//@children.0/@sourceConnections.0/@children.0" connectionRouterKind="GeneralizationManhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" location="81,0" anchorKind="FixedAtEdge" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" name="LeftAlignmentMethod" location="873,195" size="160,85" id="org.schwiebert.abl4j.align.methods/LeftAlignmentMethod" runTimeClassModel="handleEditOperationStructure(Lorg.schwiebert.abl4j.data.ITreeBank;Lorg.schwiebert.abl4j.data.ITree;),setProperties(Lorg.schwiebert.abl4j.util.PropertiesMap;)">
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="137,36">
+      <children xsi:type="editmodel:MethodEditModel" name="handleEditOperationStructure" id="org.schwiebert.abl4j.align.methods/LeftAlignmentMethod#handleEditOperationStructure(Lorg.schwiebert.abl4j.data.ITreeBank;Lorg.schwiebert.abl4j.data.ITree;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="setProperties" id="org.schwiebert.abl4j.align.methods/LeftAlignmentMethod#setProperties(Lorg.schwiebert.abl4j.util.PropertiesMap;)"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <sourceConnections xsi:type="editmodel:GeneralizationEditModel" autoLocated="true" id="org.schwiebert.abl4j.align.methods/AlignmentMethod&lt;-org.schwiebert.abl4j.align.methods/LeftAlignmentMethod" source="//@children.1" target="//@children.2/@sourceConnections.0" targetEnd="//@children.1/@sourceConnections.0/@children.1" sourceEnd="//@children.1/@sourceConnections.0/@children.0" connectionRouterKind="GeneralizationManhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" location="80,0" anchorKind="FixedAtEdge" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.7/@sourceConnections.0" name="AbstractAdvancedMethod" location="50,195" size="176,103" id="org.schwiebert.abl4j.align.methods/AbstractAdvancedMethod" runTimeClassModel="handleEditOperationStructure(Lorg.schwiebert.abl4j.data.ITreeBank;Lorg.schwiebert.abl4j.data.ITree;),AbstractAdvancedMethod(),setProperties(Lorg.schwiebert.abl4j.util.PropertiesMap;)">
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="137,54">
+      <children xsi:type="editmodel:MethodEditModel" name="AbstractAdvancedMethod" id="org.schwiebert.abl4j.align.methods/AbstractAdvancedMethod#AbstractAdvancedMethod()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="handleEditOperationStructure" id="org.schwiebert.abl4j.align.methods/AbstractAdvancedMethod#handleEditOperationStructure(Lorg.schwiebert.abl4j.data.ITreeBank;Lorg.schwiebert.abl4j.data.ITree;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="setProperties" id="org.schwiebert.abl4j.align.methods/AbstractAdvancedMethod#setProperties(Lorg.schwiebert.abl4j.util.PropertiesMap;)"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <sourceConnections xsi:type="editmodel:GeneralizationEditModel" targetConnections="//@children.8/@sourceConnections.0 //@children.3/@sourceConnections.0 //@children.0/@sourceConnections.0 //@children.1/@sourceConnections.0" autoLocated="true" id="org.schwiebert.abl4j.align.methods/AlignmentMethod&lt;-org.schwiebert.abl4j.align.methods/AbstractAdvancedMethod" source="//@children.2" target="//@children.6" targetEnd="//@children.2/@sourceConnections.0/@children.1" sourceEnd="//@children.2/@sourceConnections.0/@children.0" connectionRouterKind="GeneralizationManhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" location="88,0" anchorKind="FixedAtEdge" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="80,95" anchorKind="FixedAtEdge"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" name="LeftAndRightAlignmentMethod" location="446,195" size="204,103" id="org.schwiebert.abl4j.align.methods/LeftAndRightAlignmentMethod" runTimeClassModel="LeftAndRightAlignmentMethod(),handleEditOperationStructure(Lorg.schwiebert.abl4j.data.ITreeBank;Lorg.schwiebert.abl4j.data.ITree;),setProperties(Lorg.schwiebert.abl4j.util.PropertiesMap;)">
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="145,54">
+      <children xsi:type="editmodel:MethodEditModel" name="LeftAndRightAlignmentMethod" id="org.schwiebert.abl4j.align.methods/LeftAndRightAlignmentMethod#LeftAndRightAlignmentMethod()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="handleEditOperationStructure" id="org.schwiebert.abl4j.align.methods/LeftAndRightAlignmentMethod#handleEditOperationStructure(Lorg.schwiebert.abl4j.data.ITreeBank;Lorg.schwiebert.abl4j.data.ITree;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="setProperties" id="org.schwiebert.abl4j.align.methods/LeftAndRightAlignmentMethod#setProperties(Lorg.schwiebert.abl4j.util.PropertiesMap;)"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <sourceConnections xsi:type="editmodel:GeneralizationEditModel" autoLocated="true" id="org.schwiebert.abl4j.align.methods/AlignmentMethod&lt;-org.schwiebert.abl4j.align.methods/LeftAndRightAlignmentMethod" source="//@children.3" target="//@children.2/@sourceConnections.0" targetEnd="//@children.3/@sourceConnections.0/@children.1" sourceEnd="//@children.3/@sourceConnections.0/@children.0" connectionRouterKind="GeneralizationManhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" location="102,0" anchorKind="FixedAtEdge" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" name="WagnerFisherBiasedAlignmentMethod" location="50,483" size="242,29" id="org.schwiebert.abl4j.align.methods/WagnerFisherBiasedAlignmentMethod" runTimeClassModel="">
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <sourceConnections xsi:type="editmodel:GeneralizationEditModel" targetConnections="//@children.5/@sourceConnections.0" autoLocated="true" id="org.schwiebert.abl4j.align.methods/WagnerFisherAlignmentMethod&lt;-org.schwiebert.abl4j.align.methods/WagnerFisherBiasedAlignmentMethod" source="//@children.4" target="//@children.7" targetEnd="//@children.4/@sourceConnections.0/@children.1" sourceEnd="//@children.4/@sourceConnections.0/@children.0" connectionRouterKind="GeneralizationManhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" location="121,0" anchorKind="FixedAtEdge" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="104,85" anchorKind="FixedAtEdge"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" name="WagnerFisherDefaultAlignmentMethod" location="322,483" size="246,29" id="org.schwiebert.abl4j.align.methods/WagnerFisherDefaultAlignmentMethod" runTimeClassModel="">
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <sourceConnections xsi:type="editmodel:GeneralizationEditModel" autoLocated="true" id="org.schwiebert.abl4j.align.methods/WagnerFisherAlignmentMethod&lt;-org.schwiebert.abl4j.align.methods/WagnerFisherDefaultAlignmentMethod" source="//@children.5" target="//@children.4/@sourceConnections.0" targetEnd="//@children.5/@sourceConnections.0/@children.1" sourceEnd="//@children.5/@sourceConnections.0/@children.0" connectionRouterKind="GeneralizationManhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" location="123,0" anchorKind="FixedAtEdge" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:InterfaceEditModel" targetConnections="//@children.2/@sourceConnections.0" name="AlignmentMethod" location="467,50" size="160,95" id="org.schwiebert.abl4j.align.methods/AlignmentMethod" runTimeClassModel="handleEditOperationStructure(Lorg.schwiebert.abl4j.data.ITreeBank;Lorg.schwiebert.abl4j.data.ITree;),setProperties(Lorg.schwiebert.abl4j.util.PropertiesMap;)">
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="137,36">
+      <children xsi:type="editmodel:MethodEditModel" name="handleEditOperationStructure" id="org.schwiebert.abl4j.align.methods/AlignmentMethod#handleEditOperationStructure(Lorg.schwiebert.abl4j.data.ITreeBank;Lorg.schwiebert.abl4j.data.ITree;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="setProperties" id="org.schwiebert.abl4j.align.methods/AlignmentMethod#configure(Lorg.schwiebert.abl4j.util.PropertiesMap;)"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.4/@sourceConnections.0" name="WagnerFisherAlignmentMethod" location="50,348" size="208,85" id="org.schwiebert.abl4j.align.methods/WagnerFisherAlignmentMethod" runTimeClassModel="handleEditOperationStructure(Lorg.schwiebert.abl4j.data.ITreeBank;Lorg.schwiebert.abl4j.data.ITree;),setProperties(Lorg.schwiebert.abl4j.util.PropertiesMap;)">
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="137,36">
+      <children xsi:type="editmodel:MethodEditModel" name="handleEditOperationStructure" id="org.schwiebert.abl4j.align.methods/WagnerFisherAlignmentMethod#handleEditOperationStructure(Lorg.schwiebert.abl4j.data.ITreeBank;Lorg.schwiebert.abl4j.data.ITree;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="setProperties" id="org.schwiebert.abl4j.align.methods/WagnerFisherAlignmentMethod#setProperties(Lorg.schwiebert.abl4j.util.PropertiesMap;)"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <sourceConnections xsi:type="editmodel:GeneralizationEditModel" targetConnections="//@children.9/@sourceConnections.0" autoLocated="true" id="org.schwiebert.abl4j.align.methods/AbstractAdvancedMethod&lt;-org.schwiebert.abl4j.align.methods/WagnerFisherAlignmentMethod" source="//@children.7" target="//@children.2" targetEnd="//@children.7/@sourceConnections.0/@children.1" sourceEnd="//@children.7/@sourceConnections.0/@children.0" connectionRouterKind="GeneralizationManhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" location="104,0" anchorKind="FixedAtEdge" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="88,103" anchorKind="FixedAtEdge"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" name="SuffixTreeAlignment" location="256,195" size="160,103" id="org.schwiebert.abl4j.align.methods/SuffixTreeAlignment" runTimeClassModel="SuffixTreeAlignment(),handleEditOperationStructure(Lorg.schwiebert.abl4j.data.ITreeBank;Lorg.schwiebert.abl4j.data.ITree;),setProperties(Lorg.schwiebert.abl4j.util.PropertiesMap;)">
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="137,54">
+      <children xsi:type="editmodel:MethodEditModel" name="SuffixTreeAlignment" id="org.schwiebert.abl4j.align.methods/SuffixTreeAlignment#SuffixTreeAlignment()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="handleEditOperationStructure" id="org.schwiebert.abl4j.align.methods/SuffixTreeAlignment#handleEditOperationStructure(Lorg.schwiebert.abl4j.data.ITreeBank;Lorg.schwiebert.abl4j.data.ITree;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="setProperties" id="org.schwiebert.abl4j.align.methods/SuffixTreeAlignment#setProperties(Lorg.schwiebert.abl4j.util.PropertiesMap;)"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <sourceConnections xsi:type="editmodel:GeneralizationEditModel" autoLocated="true" id="org.schwiebert.abl4j.align.methods/AlignmentMethod&lt;-org.schwiebert.abl4j.align.methods/SuffixTreeAlignment" source="//@children.8" target="//@children.2/@sourceConnections.0" targetEnd="//@children.8/@sourceConnections.0/@children.1" sourceEnd="//@children.8/@sourceConnections.0/@children.0" connectionRouterKind="GeneralizationManhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" location="80,0" anchorKind="FixedAtEdge" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" name="AllAlignmentsMethod" location="288,348" size="160,85" id="org.schwiebert.abl4j.align.methods/AllAlignmentsMethod" runTimeClassModel="handleEditOperationStructure(Lorg.schwiebert.abl4j.data.ITreeBank;Lorg.schwiebert.abl4j.data.ITree;),setProperties(Lorg.schwiebert.abl4j.util.PropertiesMap;)">
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="137,36">
+      <children xsi:type="editmodel:MethodEditModel" name="handleEditOperationStructure" id="org.schwiebert.abl4j.align.methods/AllAlignmentsMethod#handleEditOperationStructure(Lorg.schwiebert.abl4j.data.ITreeBank;Lorg.schwiebert.abl4j.data.ITree;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="setProperties" id="org.schwiebert.abl4j.align.methods/AllAlignmentsMethod#setProperties(Lorg.schwiebert.abl4j.util.PropertiesMap;)"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <sourceConnections xsi:type="editmodel:GeneralizationEditModel" autoLocated="true" id="org.schwiebert.abl4j.align.methods/AbstractAdvancedMethod&lt;-org.schwiebert.abl4j.align.methods/AllAlignmentsMethod" source="//@children.9" target="//@children.7/@sourceConnections.0" targetEnd="//@children.9/@sourceConnections.0/@children.1" sourceEnd="//@children.9/@sourceConnections.0/@children.0" connectionRouterKind="GeneralizationManhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" location="80,0" anchorKind="FixedAtEdge" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <diagramOptions xsi:type="options:ClassDiagramOptions" properties="wireOptions=1;Product=eUML2" autoName="false"/>
+  <boardSetting snapToGeometry="true" gridEnabled="true" gridSpacing="15,15" gridOrigin="0,0" rulerUnit="pixel" gridVisibility="false">
+    <leftRuler/>
+    <topRuler/>
+  </boardSetting>
+  <classDiagramPreferences xsi:type="editmodel:UMLClassDiagramPreference" showPopupBars="true" showConnectionHandles="true" attributeSorter="Natural" methodSorter="Natural" showClassStereotype="true" showPackageStereotype="true" showDependencyStereotype="true" showInterfaceStereotype="true" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+</editmodel:ClassDiagramEditModel>
