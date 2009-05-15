@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project default="javadoc">
+<target name="javadoc">
+<javadoc access="private" author="true" classpath="lib/jdom.jar:lib/junit-4.4.jar:lib/log4j-1.2.15.jar" destdir="doc/api" doctitle="ABL4J - Alignment Based Learning For Java" nodeprecated="false" nodeprecatedlist="false" noindex="false" nonavbar="false" notree="false" packagenames="org.schwiebert.abl4j.random,org.schwiebert.abl4j.tests,org.schwiebert.abl4j.distance,org.schwiebert.abl4j.io,org.schwiebert.abl4j.align.methods,org.schwiebert.abl4j.select.method,org.schwiebert.abl4j.data,org.schwiebert.abl4j.data.impl.abl,org.schwiebert.abl4j,org.schwiebert.abl4j.align,org.schwiebert.abl4j.suffixtree,org.schwiebert.abl4j.cluster,org.schwiebert.abl4j.cluster.methods,org.schwiebert.abl4j.util,org.schwiebert.abl4j.select" source="1.5" sourcepath="src" splitindex="true" use="true" version="true">
+<link href="http://jdom.org/docs/apidocs/"/>
+<link href="http://java.sun.com/j2se/1.5.0/docs/api/"/>
+<link href="http://junit.sourceforge.net/javadoc/"/>
+<link href="http://logging.apache.org/log4j/1.2/apidocs/"/>
+</javadoc>
+</target>
+</project>

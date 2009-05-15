@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="ABL4J" default="build.all" basedir="." xmlns:cpptasks="antlib:org.sf.net.antcontrib.cpptasks">
+
+	<property name="version" value="0.9.7" />
+	
+	<property name="jdk.home" value="${java.home}/.."/>
+	
+	<taskdef resource="net/sf/antcontrib/antcontrib.properties">
+	  <classpath>
+	    <pathelement location="ant/ant-contrib-1.0b3.jar"/>
+	  </classpath>
+	</taskdef>
+	
+	<taskdef resource="cpptasks.tasks">
+	  <classpath>
+	    <pathelement location="ant/lib/cpptasks.jar"/>
+	  </classpath>
+	</taskdef>
+	
+	<typedef resource="cpptasks.types">
+	  <classpath>
+	    <pathelement location="ant/lib/cpptasks.jar"/>
+	  </classpath>
+	</typedef>
+	
+	
+	<target name="build.all" depends="clean, build.javadoc, build.binary, build.source">
+	</target>
+	
+	<target name="clean">
+		<delete includeemptydirs="true">
+			 <fileset dir="temp" includes="**/*"/>
+			 <fileset dir="dist" includes="**/*"/>
+		</delete>
+	</target>
+	
+	
+	<target name="build.javadoc">
+		<echo level="info">Building javadoc...</echo>
+		<delete>
+			<fileset dir="doc/api">
+			    <include name="*/**"/>
+			</fileset>
+		</delete>
+	    <javadoc 
+	    	access="private" 
+	    	author="true" 
+	    	classpath="lib/jdom.jar:lib/junit-4.4.jar:lib/log4j-1.2.15.jar:lib/guessEncoding.jar"
+	    	destdir="doc/api" 
+	    	doctitle="ABL4J - Alignment Based Learning For Java" 
+	    	header="ABL4J (Alignment Based Learning for Java) - ${version}"
+	    	windowtitle="ABL4J (Alignment Based Learning for Java) - API Docs"
+	    	nodeprecated="false" 
+	    	nodeprecatedlist="false" 
+	    	noindex="false" 
+	    	nonavbar="false" 
+	    	notree="false" 
+	    	source="1.6" 
+	    	sourcepath="src" 
+	    	splitindex="true" 
+	    	use="true" 
+	    	version="true">
+	    	<doctitle><![CDATA[<h1>ABL4J (Alignment Based Learning for Java) API Documentation</h1>]]></doctitle>
+	    	<bottom><![CDATA[&copy;]]> 2007 <![CDATA[<a href="http://www.schwiebert.org/projects/abl4j.html" target="_blank">Stephan Schwiebert</a>]]></bottom>	 
+	    	<link href="http://jdom.org/docs/apidocs/"/>
+	    	<link href="http://java.sun.com/j2se/1.5.0/docs/api/"/>
+	    	<link href="http://junit.sourceforge.net/javadoc/"/>
+	    	<link href="http://logging.apache.org/log4j/1.2/apidocs/"/>
+		</javadoc>
+	</target>
+	
+	
+	<target name="build.binary">
+		<echo level="info">Building ABl4J binary distribution</echo>
+		<delete>
+			<fileset dir="temp">
+			    <include name="*"/>
+			</fileset>
+		</delete>
+		<jar destfile="temp/abl4j-${version}.jar">
+			<zipfileset dir="bin" includes="**/*" />
+		</jar>
+		<copy todir="temp" includeemptydirs="true">
+			<fileset file="libabl4j_random.so"/>
+			<fileset file="Comparing Results.txt"/>
+			<fileset file="log4j.properties"/>
+			<fileset file="README.txt"/>
+		</copy>
+		<copy todir="temp/doc">
+			<fileset dir="doc"></fileset>
+		</copy>
+		<copy todir="temp/legal">
+			<fileset dir="legal"></fileset>
+		</copy>
+		<copy todir="temp/lib">
+			<fileset dir="lib"></fileset>
+		</copy>
+		<mkdir dir="temp/orig"/>
+		<mkdir dir="temp/testdata"/>
+		<mkdir dir="temp/testdata/aligned"/>
+		<mkdir dir="temp/testdata/clustered"/>
+		<mkdir dir="temp/testdata/selected"/>
+		<mkdir dir="temp/testdata/input"/>
+		<copy file="testdata/input/input.txt" todir="temp/testdata/input"/>
+		<copy file="documentation/UserDocumentation.pdf" tofile="temp/ABL4J-${version} Reference Guide.pdf"/>
+		<jar destfile="dist/abl4j-${version}.bin.zip">
+			<zipfileset dir="temp" includes = "**/*"/>
+		</jar>
+		
+	</target>
+	
+	<target name="build.source" depends="build.binary">
+		<echo level="info">Building ABl4J source distribution</echo>
+		<copy file=".classpath" todir="temp"/>
+		<copy file=".project" todir="temp"/>
+		<copy file="build.xml" todir="temp"/>
+		<copy todir="temp/.externalToolBuilders">
+			<fileset dir=".externalToolBuilders"/>
+		</copy>
+		<copy todir="temp/c_src">
+			<fileset dir="c_src"></fileset>
+		</copy>
+		<copy todir="temp/ant">
+			<fileset dir="ant" />
+		</copy>
+		<copy todir="temp/src">
+			<fileset dir="src"/>
+		</copy>
+		<jar destfile="dist/abl4j-${version}.src.zip">
+			<zipfileset dir="temp" includes = "**/*"/>
+		</jar>
+	</target>
+	
+	<target name="build.native.library">
+		<echo level="info">Compiling native library...</echo>
+		<cc name="gcc" outfile="abl4j_random" link="shared" runtime="static">
+			<!-- Linux: -->
+<!--			<includepath path="${jdk.home}/include/"/>
+			<includepath path="${jdk.home}/include/linux/"/>-->
+			
+			<!-- Mac OS X: -->
+			<includepath path="/System/Library/Frameworks/JavaVM.framework/Versions/1.6.0/Headers/"/>
+			<fileset dir="c_src" casesensitive="yes">
+			    <include name="**/*.c"/>
+			</fileset>
+		</cc>
+	</target>
+	
+</project>

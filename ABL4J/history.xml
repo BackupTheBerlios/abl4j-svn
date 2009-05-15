@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<history>
+   <processor signature="gcc noversion nomachine-c -fPIC -I../../../../../System/Library/Frameworks/JavaVM.framework/Versions/1.6.0/Headers">
+      <target file="org_schwiebert_abl4j_random_NativeRandom.o" lastModified="1186ab52010">
+         <source file="c_src/org_schwiebert_abl4j_random_NativeRandom.c" lastModified="1184bb76100"/>
+      </target>
+   </processor>
+   <processor signature="gcc -prebind -dynamiclib">
+      <target file="libabl4j_random.dylib" lastModified="1186ab52010">
+         <source file="org_schwiebert_abl4j_random_NativeRandom.o" lastModified="1186ab52010"/>
+      </target>
+   </processor>
+</history>

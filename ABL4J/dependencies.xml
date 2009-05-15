@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dependencies>
+   <includePath signature="/I../../../../../System/Library/Frameworks/JavaVM.framework/Versions/1.6.0/Headers">
+      <source file="../../../../../System/Library/Frameworks/JavaVM.framework/Versions/1.6.0/Headers/jni_md.h" lastModified="117f70bcfb0">
+      </source>
+      <source file="../../../../../System/Library/Frameworks/JavaVM.framework/Versions/1.6.0/Headers/jni.h" lastModified="117f70bcfb0">
+         <include file="../../../../../System/Library/Frameworks/JavaVM.framework/Versions/1.6.0/Headers/jni_md.h"/>
+         <sysinclude file="../../../../../usr/include/stdio.h"/>
+         <sysinclude file="../../../../../usr/include/stdarg.h"/>
+      </source>
+      <source file="c_src/org_schwiebert_abl4j_random_NativeRandom.c" lastModified="1184bb76100">
+         <include file="../../../../../System/Library/Frameworks/JavaVM.framework/Versions/1.6.0/Headers/jni.h"/>
+         <sysinclude file="../../../../../usr/include/stdio.h"/>
+         <sysinclude file="../../../../../usr/include/stdlib.h"/>
+      </source>
+   </includePath>
+</dependencies>
