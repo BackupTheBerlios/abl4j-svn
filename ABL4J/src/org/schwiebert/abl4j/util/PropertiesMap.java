@@ -86,5 +86,41 @@ public final class PropertiesMap extends Properties {
 		return initializer;
 	}
 
+	public double getDouble(String property, double defaultValue) {
+		String value = getProperty(property);
+		if(value == null) return defaultValue;
+		return Double.parseDouble(property);
+	}
+	
+	public int getInteger(String property, int defaultValue) {
+		String value = getProperty(property);
+		if(value == null) return defaultValue;
+		return Integer.parseInt(property);
+	}
+	
+	public boolean getBoolean(String property, boolean defaultValue) {
+		String value = getProperty(property);
+		if(value == null) return defaultValue;
+		return Boolean.parseBoolean(property);
+	}
+	
+	public char getCharacter(String property, char defaultValue) {
+		String value = getProperty(property);
+		if(value == null || value.length() != 1) return defaultValue;
+		return value.charAt(0);
+	}
+	
+	public long getLong(String property, long defaultValue) {
+		String value = getProperty(property);
+		if(value == null) return defaultValue;
+		return Long.parseLong(property);
+	}
+	
+	public String getString(String property, String defaultValue) {
+		String value = getProperty(property);
+		if(value == null) return defaultValue;
+		return value;
+	}
+
 	
 }

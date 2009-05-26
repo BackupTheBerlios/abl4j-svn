@@ -70,9 +70,13 @@ public class PlainTextSerializationVisitor implements ISerializationVisitor {
 	}
 
 	public void visitNonTerminal(NonTerminal nonTerminal, boolean hasNext) throws IOException {
-		writer.write(nonTerminal.value+"");
-		if(hasNext) {
-			writer.write(',');
+		try {
+			writer.write(nonTerminal.value+"");
+			if(hasNext) {
+				writer.write(',');
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 
 	}

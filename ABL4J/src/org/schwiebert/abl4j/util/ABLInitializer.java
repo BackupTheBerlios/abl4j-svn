@@ -104,7 +104,11 @@ public class ABLInitializer {
 	public void initialize(String[] arguments, Properties props) {
 		synchronized (log4JConfigured) {
 			if(!log4JConfigured) {
-				PropertyConfigurator.configure("log4j.properties");				
+				try {
+					PropertyConfigurator.configure("log4j.properties");									
+				} catch (Exception x) {
+					System.out.println("ABL Initializer: No log4j properties found");
+				}
 				log4JConfigured = true;
 			}
 		}
