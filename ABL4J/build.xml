@@ -61,7 +61,7 @@
 	    	use="true" 
 	    	version="true">
 	    	<doctitle><![CDATA[<h1>ABL4J (Alignment Based Learning for Java) API Documentation</h1>]]></doctitle>
-	    	<bottom><![CDATA[&copy;]]> 2007 <![CDATA[<a href="http://www.schwiebert.org/projects/abl4j.html" target="_blank">Stephan Schwiebert</a>]]></bottom>	 
+	    	<bottom><![CDATA[&copy;]]> 2007 - 2009 <![CDATA[<a href="http://www.schwiebert.org/projects/abl4j.html" target="_blank">Stephan Schwiebert</a>]]></bottom>	 
 	    	<link href="http://jdom.org/docs/apidocs/"/>
 	    	<link href="http://java.sun.com/j2se/1.5.0/docs/api/"/>
 	    	<link href="http://junit.sourceforge.net/javadoc/"/>
