@@ -82,8 +82,12 @@ public class ABLClusterMethod implements ClusterMethod<AblNtMap>, MergeMethod<Ab
 	
 		for (IConstituent<?> c : t.getConstituentStructure()) {
 			// get the first NT
+			if(c == null) {
+				logger.error("Empty constituent found in tree " + t.getSequenceId());
+				continue;
+			}
 			NonTerminal i = c.get(0);
-
+			
 			// get new NT for first old NT
 			ntNew = ntm.getNewNT(t, c, i);
 			// take the next NT:
