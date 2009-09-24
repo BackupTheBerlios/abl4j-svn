@@ -126,6 +126,9 @@
 		<copy todir="temp/src">
 			<fileset dir="src"/>
 		</copy>
+		<jar destfile = "temp/abl4j-${version}.zip">
+			<zipfileset dir="src" includes = "**/*"/>
+		</jar>
 		<jar destfile="dist/abl4j-${version}.src.zip">
 			<zipfileset dir="temp" includes = "**/*"/>
 		</jar>

@@ -34,7 +34,7 @@ import org.schwiebert.abl4j.util.AblProperties;
 @SuppressWarnings("unchecked")
 public class PlainTextSerializationVisitor implements ISerializationVisitor {
 
-	private Writer writer;
+	protected Writer writer;
 	
 	private boolean printConstituentScore = true;
 	private boolean printSentenceId = false;
@@ -120,8 +120,6 @@ public class PlainTextSerializationVisitor implements ISerializationVisitor {
 	public void close() throws IOException {
 		writer.close();
 	}
-
-	
 
 	
 
