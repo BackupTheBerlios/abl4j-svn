@@ -100,14 +100,14 @@ public class FindIterator<T> implements Iterator<IConstituent<T>> {
 	private synchronized int indexOf(Object elem, int index) {
     	int elementCount = list.size();
     	if (elem == null) {
-	    for (int i = index ; i < elementCount ; i++)
-		if (list.get(i)==null)
-		    return i;
-    	} else {
-	    for (int i = index ; i < elementCount ; i++)
-		if (elem.equals(list.get(i)))
-		    return i;
-    	}
+			for (int i = index; i < elementCount; i++)
+				if (list.get(i) == null)
+					return i;
+		} else {
+			for (int i = index; i < elementCount; i++)
+				if (elem.equals(list.get(i)))
+					return i;
+		}
 	return -1;
     }
 	
