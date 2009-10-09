@@ -182,7 +182,7 @@ how align, cluster, and select are executed.
 		
 		// Create a new Treebank
 		ITreeBank treeBank = DataFactory.newTreeBank();
-		AblReader reader = IOFactory.getReader(properties);
+		ITreeBankReader reader = IOFactory.getReader(properties);
 		reader.readTreebank(treeBank);
 \end{java}
 
@@ -202,7 +202,7 @@ implementations without modifying any code.
 label={abl_code_new_tb}] 
 		// Create a new Treebank
 		ITreeBank treeBank = DataFactory.newTreeBank();
-		AblReader reader = IOFactory.getReader(properties);
+		ITreeBankReader reader = IOFactory.getReader(properties);
 		reader.readTreebank(treeBank);
 \end{java}
 
@@ -239,7 +239,7 @@ Finally, the processed data should be stored somewhere, so in listing
 
 \begin{java} [caption={Storing the new Treebank}, label={abl_code_store}] 
 		// Write treebank
-		AblWriter writer = IOFactory.getWriter(properties);
+		ITreebankWriter writer = IOFactory.getWriter(properties);
 		writer.writeTreebank(treeBank);
 \end{java}
 
