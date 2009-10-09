@@ -90,7 +90,6 @@ public abstract class AbstractAdvancedMethod implements AlignmentMethod {
 		InsertMode currentMode = InsertMode.NONE, nextWord = InsertMode.NONE;
 		Pair<Integer, Integer> begin = new Pair<Integer, Integer>(0, 0);
 		Pair<Integer, Integer> current = new Pair<Integer, Integer>(0, 0);
-		logger.info("Alignments in " + t1.getSequenceId() + " and " + t2.getSequenceId() + ": " + alignments.size());
 		final int alignmentsSize = alignments.size();
 		for(int i = 0; i < alignmentsSize; i++) {
 			EditOperation operation = alignments.get(i);
