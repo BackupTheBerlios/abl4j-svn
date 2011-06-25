@@ -18,6 +18,7 @@
  **********************************************************************/
 package org.schwiebert.abl4j.data.impl.abl;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -32,7 +33,7 @@ import org.schwiebert.abl4j.data.IWord;
  *
  * @param <T>
  */
-public class Sentence<T> extends ArrayList<IWord<T>> implements ISentence<T> {
+public class Sentence<T> implements ISentence<T>, Serializable {
 
 	private static final long serialVersionUID = 7500901585917712938L;
 
@@ -51,6 +52,8 @@ public class Sentence<T> extends ArrayList<IWord<T>> implements ISentence<T> {
 	 * An optional  comment line
 	 */
 	private String commentLine = "";
+
+	protected IWord<T>[] words;
 
 	
 	public Sentence() {
@@ -157,23 +160,36 @@ public class Sentence<T> extends ArrayList<IWord<T>> implements ISentence<T> {
     	}
 	return -1;
     }
-    
-    /*
-     * (non-Javadoc)
-     * @see org.schwiebert.abl4j.data.ISentence#getWords()
-     */
-    public List<IWord<T>> getWords() {
-		return this;
+   
+
+	public void setWords(IWord<T>[] words) {
+		this.words = words;
 	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.schwiebert.abl4j.data.ISentence#addWords(java.util.List)
-     */
-	public void addWords(List<IWord<T>> words) {
-		super.addAll(words);
+	public int size() {
+		return words.length;
+	}
+
+	public IWord<T> get(int index) {
+		return words[index];
+	}
+	
+	public IWord<T>[] subArray(final int begin, final int end) {
+		IWord<T>[] array = new IWord[end - begin];
+		for(int i = begin; i < end; i++) {
+			array[i-begin] = words[i]; 
+		}
+		return array;
 	}
     
-    
+	public void clear() {
+		words = null;
+	}
 
+	public IWord<T>[] getWordArray() {
+		return words;
+	}
+	
+	
+	
 }

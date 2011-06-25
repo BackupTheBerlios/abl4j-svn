@@ -102,6 +102,7 @@ public class ABLInitializer {
 	 * @param arguments the properties to add.
 	 */
 	public void initialize(String[] arguments, Properties props) {
+		/*
 		synchronized (log4JConfigured) {
 			if(!log4JConfigured) {
 				System.out.println("Configuring log4j...");
@@ -112,7 +113,7 @@ public class ABLInitializer {
 				}
 				log4JConfigured = true;
 			}
-		}
+		}*/
 		setDefaults();
 		loadProperties();
 		if(props != null) {

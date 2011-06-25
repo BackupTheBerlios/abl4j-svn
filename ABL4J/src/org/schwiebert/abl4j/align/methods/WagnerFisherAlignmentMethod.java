@@ -65,6 +65,7 @@ public abstract class WagnerFisherAlignmentMethod extends AbstractAdvancedMethod
 				Alignment alignment = findAlignment(current, t);
 				handleEditOperationAlignment((ITree) current, (ITree) t, alignment);
 				// delete a;
+				alignment.clear();
 			}
 
 		}

@@ -20,23 +20,25 @@ package org.schwiebert.abl4j.util;
 
 import java.io.Serializable;
 
+import org.schwiebert.abl4j.distance.EditOperation;
+
 /**
  * Helper class that represents a pair of two {@link Object}s.
  * 
  * @author Stephan Schwiebert (sschwieb@spinfo.uni-koeln.de)
  */
-public class Pair<A, B> implements Serializable {
+public class EditPair implements Serializable {
 
 	private static final long serialVersionUID = 6722692557830611787L;
 
 
-	public Pair(final A a, final B b) {
+	public EditPair(final float a, final EditOperation b) {
 		this.first = a;
 		this.second = b;
 	}
 
-	public final A first;
-	public final B second;
+	public float first;
+	public final EditOperation second;
 
 	
 	/**
@@ -47,7 +49,7 @@ public class Pair<A, B> implements Serializable {
 	@Override
 	public boolean equals(Object obj) {
 		try {
-			return first.equals(((Pair) obj).first) && second.equals(((Pair) obj).second);
+			return first == (((EditPair) obj).first) && second.equals(((EditPair) obj).second);
 		} catch (ClassCastException e) {
 			return false;
 		}
@@ -58,7 +60,7 @@ public class Pair<A, B> implements Serializable {
 	 */
 	@Override
 	public int hashCode() {
-		return first.hashCode() * 31 + second.hashCode();
+		return (int) first * 31 + second.hashCode();
 	}
 	
 	/*

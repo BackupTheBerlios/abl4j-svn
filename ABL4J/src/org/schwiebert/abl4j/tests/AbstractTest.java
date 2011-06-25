@@ -70,8 +70,9 @@ public abstract class AbstractTest {
 				String[] args = abl4jCommand.split("[ ]+");
 				long javaStart = System.currentTimeMillis();
 				runJavaProgram(args);
+				
 				long javaEnd = System.currentTimeMillis();
-				String ablCommand = cCmd + currentOpts;
+				/*String ablCommand = cCmd + currentOpts;
 				String cFileName = new File(outputDirectory, namePrefix + "_" + (counter < 100 ? 0 : "") + (counter < 10 ? 0 : "") + counter + "_c.txt").getAbsolutePath();
 				ablCommand += " -o " + cFileName;
 				long cppStart = System.currentTimeMillis();
@@ -84,8 +85,9 @@ public abstract class AbstractTest {
 				String errorMsg = "Compare Failed on Fileset: " + counter;
 				counter++;
 				assertTrue(errorMsg, compareFiles(jFileName, cFileName));
+				*/
 				javaTime += (javaEnd - javaStart);
-				cppTime += (cppEnd - cppStart);
+				//cppTime += (cppEnd - cppStart);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

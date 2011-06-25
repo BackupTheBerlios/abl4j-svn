@@ -21,6 +21,7 @@ package org.schwiebert.abl4j.distance;
 
 import java.util.List;
 
+import org.schwiebert.abl4j.util.EditPair;
 import org.schwiebert.abl4j.util.Pair;
 
 
@@ -44,55 +45,41 @@ public class EditDistance {
 
 	protected float[][] matrix;
 
-	protected final List<EditOperation> operations;
+	protected final EditOperation[] operations;
 
-	public List<EditOperation> getOperations() {
+	public EditOperation[] getOperations() {
 		return operations;
 	}
 
 	public EditDistance(final List<EditOperation> op) {
-		this.operations = op;
+		this.operations = new EditOperation[op.size()];
+		op.toArray(operations);
 		alignment = new Alignment();
 	}
 
-	public Pair<Float, EditOperation> minGamma(final Pair<Integer, Integer> p) throws RuntimeException {
-		// Evtl. stimmt der Vergleich hier nicht -
-		// wenn min in der c++ version anders ist, werden andere
-		// Operationen zurückgegeben...
-		if (operations.size() == 0) {
+	public EditPair minGamma(final Pair<Integer, Integer> p) throws RuntimeException {
+		if (operations.length == 0) {
 			throw new RuntimeException("Bad_operations");
 		}
-//		final Iterator<EditOperation> opIter = operations.iterator();
 		int opCounter = 0;
-//		EditOperation op = opIter.next();
-		EditOperation op = operations.get(opCounter++);
+		EditOperation op = operations[opCounter++];
 		Pair<Integer, Integer> prev = op.previousCoordinates(p);
 		while ((prev.first < 0) || (prev.second < 0)) {
-			//op = opIter.next();
-			op = operations.get(opCounter++);
-			if (op == operations.get(operations.size() - 1)) {
+			op = operations[opCounter++];
+			if (op == operations[operations.length-1]) {
 				throw new RuntimeException("Bad_operations");
 			}
 			prev = op.previousCoordinates(p);
 		}
-		Pair<Float, EditOperation> min = op.gamma(p);
+		EditPair min = op.gamma(p);
 		min.first += matrix[prev.first][prev.second];
-		//while (opIter.hasNext()) {
-		while(opCounter < operations.size()) {
-			//op = opIter.next();
-			op = operations.get(opCounter++);
+		while(opCounter < operations.length) {
+			op = operations[opCounter++];
 			prev = op.previousCoordinates(p);
 			if ((prev.first >= 0) && (prev.second >= 0)) {
-				Pair<Float, EditOperation> next = op.gamma(p);
+				EditPair next = op.gamma(p);
 				next.first += matrix[prev.first][prev.second];
 				if (next.first < min.first) {
-					//float f = next.first;
-//					if (Math.round(f) == f) {
-//					} else {
-//						NumberFormat nf = NumberFormat.getInstance(Locale.ENGLISH);
-//						nf.setMaximumFractionDigits(5);
-//					}
-
 					min = next;
 				}
 			}

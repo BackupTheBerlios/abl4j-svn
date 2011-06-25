@@ -49,6 +49,7 @@ public final class AllAlignmentsMethod extends AbstractAdvancedMethod {
 			for(int i = 0; i < alignments.size(); i++) {
 				handleEditOperationAlignment(current, t, alignments.get(i));
 			}
+			alignments.clear();
 		}
 	}
 

@@ -18,7 +18,7 @@
  **********************************************************************/
 package org.schwiebert.abl4j.distance;
 
-import org.schwiebert.abl4j.data.ISentence;
+import org.schwiebert.abl4j.data.IWord;
 
 /**
  * This class represents the "biased" Wagner-Fisher-Algorithm
@@ -32,7 +32,7 @@ import org.schwiebert.abl4j.data.ISentence;
 public final class WFBiased extends WagnerFisher {
 
 	@SuppressWarnings("unchecked")
-	public WFBiased(final ISentence s1a, final int b1, final int e1, final ISentence s2a, final int b2, final int e2) {
+	public WFBiased(final IWord[] s1a, final int b1, final int e1, final IWord[] s2a, final int b2, final int e2) {
 		super(b1, e1, b2, e2, new EditOperation.Biased(s1a, b1, e1, s2a, b2, e2));
 	}
 

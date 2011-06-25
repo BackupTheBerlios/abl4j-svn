@@ -23,18 +23,17 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.schwiebert.abl4j.InvalidConfigurationException;
 import org.schwiebert.abl4j.data.IConstituent;
 import org.schwiebert.abl4j.data.ITree;
 import org.schwiebert.abl4j.data.ITreeBank;
+import org.schwiebert.abl4j.data.NonTerminal;
 import org.schwiebert.abl4j.util.AblProperties;
 import org.schwiebert.abl4j.util.PropertiesMap;
-import java.util.Properties;
-import org.schwiebert.abl4j.data.ISentence;
-import org.schwiebert.abl4j.data.IWord;
-import org.schwiebert.abl4j.data.NonTerminal;
 
 /**
  * Used to serialize an    {@link ITreeBank}   . The output format can be defined by using the properties    {@link AblProperties#OUTPUT_FILE}    and    {@link AblProperties#OUTPUT_ENCODING}   . This implementations requires an    {@link ISerializationVisitor}    which can be defined via    {@link AblProperties#SERIALISATION_VISITOR}    and which probably simplifies the serialization of a treebank.
@@ -101,8 +100,9 @@ public class TreebankWriter implements ITreebankWriter {
 			visitor.visitTree(tree, true);
 			for(IConstituent<?> constituent: tree.getConstituentStructure()) {
 				visitor.visitConstituent(constituent, true);
+				final List<NonTerminal> nts = new ArrayList<NonTerminal>(constituent.getNonTerminals());
 				for(int i = 0; i < constituent.size(); i++) {
-					visitor.visitNonTerminal(constituent.get(i), i < constituent.size()-1);
+					visitor.visitNonTerminal(nts.get(i), i < constituent.size()-1);
 				}
 				visitor.visitConstituent(constituent, false);
 			}

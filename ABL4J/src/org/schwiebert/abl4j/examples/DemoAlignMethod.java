@@ -18,6 +18,7 @@
  **********************************************************************/
 package org.schwiebert.abl4j.examples;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -45,9 +46,10 @@ public class DemoAlignMethod implements AlignmentMethod {
 	}
 
 	private void align(ITree current, ITree other) {
-		// Get words which are shared above both sentences:
-		Set<IWord> allWords = new HashSet<IWord>(current.getWords());
-		allWords.retainAll(other.getWords());
+		if(current == other) return;
+		// Get words which are shared between both sentences:
+		Set<IWord> allWords = new HashSet<IWord>(Arrays.asList(current.getWordArray()));
+		allWords.retainAll(Arrays.asList(other.getWordArray()));
 		// Create a constituent for each of these words:
 		for (IWord word : allWords) {
 			// New non terminal symbol

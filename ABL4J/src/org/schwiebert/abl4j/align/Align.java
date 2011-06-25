@@ -88,6 +88,7 @@ public class Align implements IAblComponent {
 		}
 
 		public void run() {
+			setName("Structurize " + offset);
 			startTime = System.currentTimeMillis();
 			final int tbSize = tb.size();
 			for (int i = 0; i < tbSize; i++) {
@@ -129,12 +130,12 @@ public class Align implements IAblComponent {
 		final List<StructureThread> threadsList = new ArrayList<StructureThread>(threads);
 		if (threads <= 1) {
 			logger.info("Running align single threaded");
-			new StructureThread(threads, 0, 30).run();
+			new StructureThread(threads, 0, 500).run();
 		} else {
 			logger.info("Running align multi threaded ( " + threads + ")");
 			for (int i = 0; i < threads; i++) {
 				logger.info("Starting thread " + i);
-				StructureThread thread = new StructureThread(threads, i, 100 * threads);
+				StructureThread thread = new StructureThread(threads, i, 500 * threads);
 				threadsList.add(thread);
 				thread.start();
 			}

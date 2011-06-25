@@ -18,10 +18,14 @@
  **********************************************************************/
 package org.schwiebert.abl4j.tests;
 
+import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.net.Socket;
 
+import org.apache.log4j.Logger;
 import org.junit.AfterClass;
 import org.junit.Test;
 import org.schwiebert.abl4j.align.Main;
@@ -65,6 +69,7 @@ public class AlignTests extends AbstractTest {
 						cmdOpts.append("-p " + part_opts[j] + " ");
 						cmdOpts.append(empty[x] + " ");
 						cmdOpts.append(nomerge[z]);
+						System.out.println("OPTS: " + cmdOpts);
 						counter = runProgram(cCmd, cmdOpts + "", counter);
 					}
 				}
@@ -110,10 +115,38 @@ public class AlignTests extends AbstractTest {
 		overallCppTime+= cppTime;
 	}
 	
+	private static void doSend(String command,	String server,	String port) throws IOException {
+		Socket socket = new Socket(server, Integer.parseInt(port));
+		OutputStream os = socket.getOutputStream();
+		BufferedOutputStream out = new BufferedOutputStream(os);
+		out.write(command.getBytes());
+		out.write('\r');
+		out.flush();
+		socket.close();
+	}
+	
+	public static void startProfiling() {
+		try {
+			doSend("start", "localhost", "15599");
+		} catch (IOException e) {
+			Logger.getLogger(AlignTests.class).error("Failed to start profiling - was the profiling service enabled?");
+		}
+	}
+	
+	public static void stopProfiling() {
+		try {
+			doSend("finish", "localhost", "15599");
+		} catch (IOException e) {
+			Logger.getLogger(AlignTests.class).error("Failed to stop profiling - was the profiling service enabled?");
+		}
+	}
+	
 	@Test
 	public void testWM() throws IOException {
 		String[] align_opts = {"wm"};
+		startProfiling();
 		runAlignment(align_opts);
+		stopProfiling();
 		printExecTime();
 		overallJavaTime+= javaTime;
 		overallCppTime+= cppTime;

@@ -29,13 +29,39 @@ import org.schwiebert.abl4j.util.Pair;
  * 
  */
 @SuppressWarnings("unchecked")
-public final class Phrase extends Pair<ISentence, NonTerminal> {
+public final class Phrase {
 
 	private static final long serialVersionUID = 8624865838792609484L;
+	public NonTerminal second;
+	public ISentence first;
 
 	public Phrase(final ISentence a, final NonTerminal b) {
-		super(a, b);
+		this.first = a;
+		this.second = b;
 	}
+	
+	/**
+	 * Returns <code>true</code> if <code>this.first</code> equals <code>obj.first</code> and 
+	 * <code>this.second</code> equals <code>obj.second</code>.
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public boolean equals(Object obj) {
+		try {
+			return first.equals(((Phrase) obj).first) && second.equals(((Phrase) obj).second);
+		} catch (ClassCastException e) {
+			return false;
+		}
+	}
+
+	/**
+	 * Returns a hashCode generated from first and second
+	 */
+	@Override
+	public int hashCode() {
+		return first.hashCode() * 31 + second.hashCode();
+	}
+	
 
 
 }

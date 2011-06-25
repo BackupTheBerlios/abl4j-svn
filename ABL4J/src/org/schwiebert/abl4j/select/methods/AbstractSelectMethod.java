@@ -123,10 +123,21 @@ public abstract class AbstractSelectMethod implements SelectMethod {
 	}
 
 	private void selectProbabilityInTree(ITree t, ProbabilityStore store) {
+//		KnowledgeBase known = new KnowledgeBase();
+//		Vector<IConstituent<?>> overlap = new Vector<IConstituent<?>>();
+//		Tools.removeCopyIf(t, overlap);
+//		List<IConstituent> toRemove = Tools.removeIf(t.getConstituentStructure(), 0, t.getConstituentStructure().size(), new OverlapInTree(t));
+//		for (IConstituent constituent : toRemove) {
+//			t.getConstituentStructure().remove(constituent);
+//		}
+//		Vector<IConstituent<?>> res = selectProbabilityInRange(t, overlap, 0, t.size(), known, store);
+//		for (IConstituent<?> c : res) {
+//			t.addStructure(c);
+//		}
 		KnowledgeBase known = new KnowledgeBase();
 		Vector<IConstituent<?>> overlap = new Vector<IConstituent<?>>();
 		Tools.removeCopyIf(t, overlap);
-		List<IConstituent> toRemove = Tools.removeIf(t.getConstituentStructure(), 0, t.getConstituentStructure().size(), new OverlapInTree(t));
+		List<IConstituent> toRemove = Tools.removeIf(t.getConstituentStructure(), new OverlapInTree(t));
 		for (IConstituent constituent : toRemove) {
 			t.getConstituentStructure().remove(constituent);
 		}

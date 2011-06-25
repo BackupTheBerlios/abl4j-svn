@@ -19,6 +19,7 @@
 package org.schwiebert.abl4j.util;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Random;
 import java.util.Vector;
@@ -28,7 +29,6 @@ import org.schwiebert.abl4j.align.Predicate;
 import org.schwiebert.abl4j.data.IConstituent;
 import org.schwiebert.abl4j.data.ITree;
 import org.schwiebert.abl4j.random.MersenneTwister;
-import org.schwiebert.abl4j.random.NativeRandom;
 import org.schwiebert.abl4j.select.OverlapInTree;
 
 
@@ -49,12 +49,7 @@ public class Tools {
 
 	public static void configure(PropertiesMap properties) {
 		threadLocalCompatibility.set(properties.getBoolean(AblProperties.COMPATIBILITY_MODE));
-		logger.debug("Compatibility Mode " + (threadLocalCompatibility.get() ? "on" : "off"));
-		if(threadLocalCompatibility.get()) {
-			threadLocalRandom.set(new NativeRandom());
-		} else {
-			threadLocalRandom.set(new MersenneTwister());
-		}
+		threadLocalRandom.set(new MersenneTwister());
 		int seed = properties.getInteger(AblProperties.SEED);
 		if(seed == -1) seed = 0;
 		setSeed(seed);
@@ -75,30 +70,41 @@ public class Tools {
 
 
 	@SuppressWarnings("unchecked")
-	public static List copyIf(List list, int begin, int end, Predicate p) {
+	public static List copyIf(Collection list, Predicate p) {
 		// This procedure copies all elements for which p is true from first
 		// to last into res. This procedure is defined in the Bjarne
 		// Stroustrup C++ book.
 		List toReturn = new ArrayList();
-		for (int i = begin; i < end; i++) {
-			if (p.matches(list.get(i))) {
-				toReturn.add(list.get(i));
+		for (Object object : list) {
+			if (p.matches(object)) {
+				toReturn.add(object);
 			}
 		}
+//		for (int i = begin; i < end; i++) {
+//			if (p.matches(list.get(i))) {
+//				toReturn.add(list.get(i));
+//			}
+//		}
 		return toReturn;
 	}
 
 	@SuppressWarnings("unchecked")
-	public static List removeIf(List list, int begin, int end, Predicate p) {
+	public static List removeIf(Collection list, Predicate p) {
 		List toRemove = new ArrayList();
-		for (int i = begin; i < end; i++) {
-			if (p.matches(list.get(i))) {
-				toRemove.add(list.get(i));
+		for (Object object : list) {
+			if(p.matches(object)) {
+				toRemove.add(object);
 			}
 		}
+//		for (int i = begin; i < end; i++) {
+//			if (p.matches(list.get(i))) {
+//				toRemove.add(list.get(i));
+//			}
+//		}
 		//System.out.println("Returning: " + toRemove.size());
 		return toRemove;
 	}
+
 	
 	
 	/**

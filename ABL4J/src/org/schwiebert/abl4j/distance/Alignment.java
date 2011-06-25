@@ -18,7 +18,7 @@
  **********************************************************************/
 package org.schwiebert.abl4j.distance;
 
-import java.util.Vector;
+import java.util.ArrayList;
 
 /**
  * Helper class that represents an alignment (as list of edit operations).
@@ -26,7 +26,7 @@ import java.util.Vector;
  * @author sschwieb
  * 
  */
-public final class Alignment extends Vector<EditOperation> {
+public final class Alignment extends ArrayList<EditOperation> {
 
 	private static final long serialVersionUID = 2634817982990707590L;
 

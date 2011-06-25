@@ -18,8 +18,10 @@
  **********************************************************************/
 package org.schwiebert.abl4j.distance;
 
+import java.util.Collections;
 import java.util.List;
 
+import org.schwiebert.abl4j.util.EditPair;
 import org.schwiebert.abl4j.util.Pair;
 
 
@@ -71,14 +73,14 @@ public class WagnerFisher extends EditDistance {
 				matrix[i][j] = 0F;
 			}
 		}
-		final Pair<Integer, Integer> pair = new Pair<Integer, Integer>(0,0);
+		Pair<Integer, Integer> pair = new Pair<Integer, Integer>(0,0);
 		for (int i = 0; i <= len1; i++) {
 			for (int j = 0; j <= len2; j++) {
 				if ((i == 0) && (j == 0)) {
 					continue; // init step
 				}
-				pair.setValues(i,j);
-				final Pair<Float, EditOperation> m = minGamma(pair);
+				pair = new Pair<Integer, Integer>(i, j);
+				final EditPair m = minGamma(pair);
 				matrix[i][j] = m.first;
 			}
 		}
@@ -87,13 +89,16 @@ public class WagnerFisher extends EditDistance {
 	private final void buildAlignment() {
 		Pair<Integer, Integer> currentCoordinate = new Pair<Integer, Integer>(len1, len2);
 		while (!((currentCoordinate.first == 0) && (currentCoordinate.second == 0))) {
-			Pair<Float, EditOperation> m = minGamma(currentCoordinate);
-			alignment.add(0, m.second);
+			EditPair m = minGamma(currentCoordinate);
+			//alignment.add(0, m.second);
+			alignment.add(m.second);
 			currentCoordinate = m.second.previousCoordinates(currentCoordinate);
 		}
+		Collections.reverse(alignment);
 	}
 
 	public final Alignment getAlignment() {
+		alignment.trimToSize();
 		return alignment;
 	}
 

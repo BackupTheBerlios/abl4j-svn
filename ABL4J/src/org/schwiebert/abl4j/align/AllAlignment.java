@@ -18,12 +18,14 @@
  **********************************************************************/
 package org.schwiebert.abl4j.align;
 
-import java.util.Collections;
-import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.Vector;
 
 import org.schwiebert.abl4j.data.ITree;
+import org.schwiebert.abl4j.data.IWord;
 import org.schwiebert.abl4j.distance.Alignment;
 import org.schwiebert.abl4j.distance.EditOperation;
 import org.schwiebert.abl4j.util.Pair;
@@ -41,21 +43,23 @@ public final class AllAlignment {
 
 	
 
-	private final Vector<EditOperation> operations;
+	private final EditOperation[] operations;
 
 	private final Vector<Alignment> alignments;
 
 	private final int begin1, end1, begin2, end2;
 	
-	@SuppressWarnings("unchecked")
 	private final ITree b, e;
 
-	final class Link extends Pair<Integer, Integer> {
+	final class Link implements Comparable<Link> {
 
 		private static final long serialVersionUID = -2080676139181086441L;
+		
+		private final int first, second;
 
 		public Link(final int a, final int b) {
-			super(a, b);
+			this.first = a;
+			this.second = b;
 		}
 
 		public String toString() {
@@ -65,7 +69,7 @@ public final class AllAlignment {
 		@Override
 		public boolean equals(Object obj) {
 			if (obj instanceof Link) {
-				return ((Link) obj).first.equals(first) && ((Link) obj).second.equals(second);
+				return ((Link) obj).first == (first) && ((Link) obj).second == (second);
 			}
 			return false;
 		}
@@ -78,10 +82,15 @@ public final class AllAlignment {
 			return x;
 			
 		}
+		
+		@Override
+		public int hashCode() {
+			return (first << 13) * 31 + second;
+		}
 
 	}
 
-	final class LinkList extends Vector<Link> {
+	final class LinkList extends TreeSet<Link> {
 
 		private static final long serialVersionUID = -6239132255101204160L;
 
@@ -96,9 +105,9 @@ public final class AllAlignment {
 
 	final class In<E> implements Predicate<E> {
 
-		final Vector<E> elem;
+		final Set<E> elem;
 
-		public In(Vector<E> e) {
+		public In(Set<E> e) {
 			this.elem = e;
 		}
 
@@ -132,34 +141,22 @@ public final class AllAlignment {
 		}
 
 		public boolean matches(LinkList e) {
-			boolean result = true;
+			HashSet<Link> s = new HashSet<Link>(e);
+			s.removeAll(link);
+			return s.isEmpty();
+			
+/*			boolean result = true;
 			for (int i = 0; i < link.size(); i++) {
 				if (!e.contains(link.get(i))) {
 					result = false;
+					break;
 				}
 			}
-			return result;
+			return result;*/
 		}
 	}
 
-	/**
-	 * Test to simulate order in a c++ set
-	 * @author stephan
-	 *
-	 */
-	final class LexiComparator implements Comparator<LinkList>{
-
-		public int compare(LinkList o1, LinkList o2) {
-			for(int i = 0; i < Math.min(o1.size(), o2.size()); i++) {
-				int result = o1.get(i).compareTo(o2.get(i));
-				if(result != 0) {
-					return result;
-				}
-			}
-			if(o1.size() == o2.size()) return 0;
-			return o1.size() - o2.size();
-		}
-	}
+	
 	
 	@SuppressWarnings("unchecked")
 	public AllAlignment(final ITree b, final ITree e, final boolean comparismMode) {
@@ -169,43 +166,48 @@ public final class AllAlignment {
 		this.end1 = b.size();
 		this.begin2 = 0;
 		this.end2 = e.size();
-		operations = new Vector<EditOperation>();
-		alignments = new Vector<Alignment>();
+		operations = new EditOperation[3];
 		// Trivial operations: Insert, Delete, Substitute whole sequences
-		operations.add(new EditOperation.Insert(begin1, end1, begin2, end2));
-		operations.add(new EditOperation.Delete(begin1, end1, begin2, end2));
-		operations.add(new EditOperation.Substitute(b, begin1, end1, e, begin2, end2));
+		operations[0] = new EditOperation.Insert(begin1, end1, begin2, end2);
+		operations[1] = new EditOperation.Delete(begin1, end1, begin2, end2);
+		operations[2] = new EditOperation.Substitute(b.getWordArray(), begin1, end1, e.getWordArray(), begin2, end2);
+		//Logger.getLogger(getClass()).info("Aligning trees " + b.getSequenceId() + " and " + e.getSequenceId());
 		final SetLinkList all = findAllLinks();
-		if(comparismMode) {
-			Collections.sort(all, new LexiComparator());
-		}
+//		Logger.getLogger(getClass()).info("LinkLists: " + all.size());
+//		for (LinkList l : all) {
+//			Logger.getLogger(getClass()).info("Links: " + l.size());
+//		}
+		alignments = new Vector<Alignment>();
 		for (int i = 0; i < all.size(); i++) {
 			int currentI = 0, currentJ = 0;
 			int ran_i = begin1, ran_j = begin2;
 			Alignment newAlignment = new Alignment();
-			for (Link ai : all.get(i)) {
+			LinkList linkList = all.get(i);
+			for (Link ai : linkList) {
 				while (currentI != ai.first) {
-					newAlignment.add(operations.get(0));
+					//System.out.println("ADDFIRST " + currentI + ", " + ai.first);
+					newAlignment.add(operations[0]);
 					currentI++;
 					ran_i++;
 				}
 				while (currentJ != ai.second) {
-					newAlignment.add(operations.get(1));
+					//System.err.println("ADDSECOND");
+					newAlignment.add(operations[1]);
 					currentJ++;
 					ran_j++;
 				}
-				newAlignment.add(operations.get(2));
+				newAlignment.add(operations[2]);
 				currentI++;
 				currentJ++;
 				ran_i++;
 				ran_j++;
 			}
 			while (ran_i != end1) {
-				newAlignment.add(operations.get(0));
+				newAlignment.add(operations[0]);
 				ran_i++;
 			}
 			while (ran_j != end2) {
-				newAlignment.add(operations.get(1));
+				newAlignment.add(operations[1]);
 				ran_j++;
 			}
 			alignments.add(newAlignment);
@@ -220,25 +222,26 @@ public final class AllAlignment {
 		b.clear();
 		b.addAll(temp);
 	}
-
+	
 	@SuppressWarnings("unchecked")
 	public SetLinkList findAllLinks() {
 		final LinkList m = findAllMatchingTerminals();
 		final SetLinkList p = new SetLinkList();
 		p.add(new LinkList());
-		for (int i = 0; i < m.size(); i++) {
+		for (Link link : m) {
+		//for (int i = 0; i < m_size; i++) {
 			SetLinkList p_old = new SetLinkList();
 			swap(p, p_old);
 			SetLinkList p_align = new SetLinkList();
 			for (LinkList j : p_old) {
 				LinkList o = new LinkList();
 				o.clear();
-				List<Link> list = Tools.copyIf(j, 0, j.size(), new Overlap(m.get(i)));
-				o.addAll(list);
+				List<Link> list = Tools.copyIf(j, new Overlap(link));
+					o.addAll(list);
 				if (o.isEmpty()) {
 					LinkList j_new = new LinkList();
 					j_new.addAll(j);
-					j_new.add(m.get(i));
+					j_new.add(link);
 					LinkList copy = new LinkList();
 					copy.addAll(j_new);
 					p.add(copy);
@@ -248,9 +251,10 @@ public final class AllAlignment {
 					LinkList copy = new LinkList();
 					copy.addAll(j_new);
 					p.add(copy);
-					List new_end = Tools.removeIf(j_new, 0, j_new.size(), new In<Link>(o)); // -o
+					
+					List new_end = Tools.removeIf(j_new, new In<Link>(o)); // -o
 					j_new.removeAll(new_end);
-					j_new.add(m.get(i)); // +i
+					j_new.add(link); // +i
 					copy = new LinkList();
 					copy.addAll(j_new);
 					if (!p_align.contains(copy)) {
@@ -260,9 +264,10 @@ public final class AllAlignment {
 			}
 			SetLinkList insert_true = new SetLinkList();
 			for (int x = 0; x < p_align.size(); x++) {
-				if ((Tools.findIf(p, 0, p.size(), new Subset(p_align.get(x))) == -1)
-						&& (Tools.findIf(p_align, 0, x, new Subset(p_align.get(x))) == -1)
-						&& (Tools.findIf(p_align, x + 1, p_align.size(), new Subset(p_align.get(x))) == -1)) {
+				final Subset set = new Subset(p_align.get(x));
+				if ((Tools.findIf(p, 0, p.size(), set) == -1)
+						&& (Tools.findIf(p_align, 0, x, set) == -1)
+						&& (Tools.findIf(p_align, x + 1, p_align.size(), set) == -1)) {
 					if (!insert_true.contains(p_align.get(x))) {
 						LinkList copy = new LinkList();
 						copy.addAll(p_align.get(x));
@@ -270,7 +275,6 @@ public final class AllAlignment {
 					}
 				}
 			}
-
 			for (LinkList linkList : insert_true) {
 				if (!p.contains(linkList)) {
 					p.add(linkList);
@@ -283,18 +287,24 @@ public final class AllAlignment {
 	public LinkList findAllMatchingTerminals() {
 		final LinkList res = new LinkList();
 		int i = 0;
+		final IWord[] bwords = b.getWordArray();
+		final IWord[] ewords = e.getWordArray();
 		for (int i_i = begin1; i_i != end1; i_i++, i++) {
 			int j = 0;
 			for (int j_i = begin2; j_i != end2; j_i++, j++) {
-				if (b.get(i_i).equals(e.get(j_i))) {
+				if(bwords[i_i].equals(ewords[j_i])) {
 					res.add(new Link(i, j));
 				}
+//				if (b.get(i_i).equals(e.get(j_i))) {
+//					res.add(new Link(i, j));
+//				}
 			}
 		}
 		return res;
 	}
 
 	public final Vector<Alignment> getAlignments() {
+	//	alignments.trimToSize();
 		return alignments;
 	}
 

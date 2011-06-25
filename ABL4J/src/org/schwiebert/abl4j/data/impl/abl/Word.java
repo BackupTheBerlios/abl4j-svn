@@ -42,7 +42,7 @@ import org.schwiebert.abl4j.util.WordMapping;
  * 
  */
 @SuppressWarnings("unchecked")
-public final class Word<T> implements Serializable, IWord<T> {
+public class Word<T> implements Serializable, IWord<T> {
 
 	private static final long serialVersionUID = 5795945638213012406L;
 
@@ -67,10 +67,11 @@ public final class Word<T> implements Serializable, IWord<T> {
 	 */
 	@Override
 	public boolean equals(Object obj) {
-		if (obj instanceof Word) {
+		try {
 			return ((Word) obj).index == index;
+		} catch (ClassCastException e) {
+			return false;
 		}
-		return super.equals(obj);
 	}
 	
 	public Word() {

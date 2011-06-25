@@ -104,21 +104,10 @@ public interface ISentence<T> {
 	 */
 	public abstract int indexOf(IWord<T> elem, int index);
 
-	/**
-	 * Returns the subList of {@link IWord} from <code>begin</code> to
-	 * <code>end</code>, as defined in {@link List#subList(int, int)}.
-	 * @param begin the begin index (included)
-	 * @param end the end index (not included)
-	 * @return the sublist
-	 * @see List#subList(int, int)
-	 */
-	public abstract List<IWord<T>> subList(int begin, int end);
 	
-	/**
-	 * Returns the list of all {@link IWord}s in this sentence.
-	 * @return the list of words
-	 */
-	public abstract List<IWord<T>> getWords();
+	public IWord<T>[] subArray(final int begin, final int end);
+		
+	public IWord<T>[] getWordArray();
 	
 	/**
 	 * Returns the number of {@link IWord}s in this sentence.
@@ -133,12 +122,8 @@ public interface ISentence<T> {
 	 */
 	public abstract IWord<T> get(int index);
 
-	/**
-	 * Adds all {@link IWord} stored in words to this sentence,
-	 * as in {@link List#addAll(java.util.Collection)}.
-	 * @param words
-	 */
-	public abstract void addWords(List<IWord<T>> words);
+	
+	public abstract void setWords(IWord<T>[] words);
 
 
 }

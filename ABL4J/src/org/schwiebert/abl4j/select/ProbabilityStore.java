@@ -55,7 +55,7 @@ public class ProbabilityStore {
 		return toReturn;
 	}
 
-	public int getCount(Pair<ISentence, NonTerminal> phrase) {
+	public int getCount(Phrase phrase) {
 		return pstore.get(phrase);
 	}
 

@@ -20,13 +20,18 @@
 package org.schwiebert.abl4j.data.impl.abl;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.Vector;
 
+import org.schwiebert.abl4j.data.IConstituent;
 import org.schwiebert.abl4j.data.ITree;
 import org.schwiebert.abl4j.data.ITreeBank;
 import org.schwiebert.abl4j.data.IWord;
+import org.schwiebert.abl4j.data.NonTerminal;
 
 /**
  * A Treebank is a {@link List} of {@link ITree} objects.
@@ -37,7 +42,7 @@ import org.schwiebert.abl4j.data.IWord;
  *         (Java-Implementation)
  * 
  */
-public final class TreeBank<T> extends ArrayList<ITree<T>> implements ITreeBank<T> {
+public class TreeBank<T> extends ArrayList<ITree<T>> implements ITreeBank<T> {
 
 	private static final long serialVersionUID = -1447021341770660520L;
 
@@ -77,12 +82,14 @@ public final class TreeBank<T> extends ArrayList<ITree<T>> implements ITreeBank<
 	 */
 	public void doReverse() {
 		for (ITree<T> i : this) {
-			List<IWord<T>> temp = i.getWords();
+			IWord[] temp = i.getWordArray();
 			List<IWord<T>> reverse = new ArrayList<IWord<T>>();
-			for (int x = temp.size() - 1; x >= 0; x--) {
-				reverse.add(temp.get(x));
+			for (int x = temp.length - 1; x >= 0; x--) {
+				reverse.add(temp[x]);
 			}
-			i.changeSentence(reverse);
+			IWord[] words = new IWord[reverse.size()];
+			reverse.toArray(words);
+			i.changeSentence(words);
 		}
 	}
 
@@ -120,6 +127,24 @@ public final class TreeBank<T> extends ArrayList<ITree<T>> implements ITreeBank<
 		for (ITree<T> t : this) {
 			count += t.getNumberOfConstituents();
 		}
+		return count;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see org.schwiebert.abl4j.data.ITreeBank#getNumberOfUniqueNonTerminals()
+	 */
+	public int getNumberOfUniqueNonTerminals() {
+		int count = 0;
+		Set<NonTerminal> nts = new HashSet<NonTerminal>();
+		for (ITree<T> t : this) {
+			List<IConstituent<T>> constituentStructure = t.getConstituentStructure();
+			for (IConstituent<T> constituent : constituentStructure) {
+				nts.addAll(constituent.getNonTerminals());
+			}
+		}
+		count = nts.size();
+		nts.clear();
 		return count;
 	}
 
@@ -167,7 +192,7 @@ public final class TreeBank<T> extends ArrayList<ITree<T>> implements ITreeBank<
 	 * (non-Javadoc)
 	 * @see org.schwiebert.abl4j.data.ITreeBank#getTrees()
 	 */
-	public Collection<? extends ITree<T>> getTrees() {
+	public Collection<ITree<T>> getTrees() {
 		return this;
 	}
 

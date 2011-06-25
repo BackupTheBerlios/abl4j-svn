@@ -19,12 +19,15 @@
 
 package org.schwiebert.abl4j.data.impl.abl;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import org.schwiebert.abl4j.data.IConstituent;
 import org.schwiebert.abl4j.data.ISentence;
@@ -42,9 +45,12 @@ import org.schwiebert.abl4j.data.NonTerminal;
  * @author Stephan Schwiebert (sschwieb@spinfo.uni-koeln.de)
  *         (Java-Implementation)
  */
-public class Constituent<T> extends ArrayList<NonTerminal> implements IConstituent<T> {
+public class Constituent<T> implements IConstituent<T>, Serializable {
 
 	private static final long serialVersionUID = -2954053640070134123L;
+	
+	private final SortedSet<NonTerminal> nts = new TreeSet<NonTerminal>();
+	
 
 	// data members
 	/**
@@ -115,9 +121,9 @@ public class Constituent<T> extends ArrayList<NonTerminal> implements IConstitue
 	@Override
 	public boolean equals(Object o) {
 		if (o instanceof IConstituent) {
-			IConstituent<T> c = (IConstituent<T>) o;
-			boolean result = ((c.getBeginIndex() == begin) && (c.getEndIndex() == end));
-			return result;
+			if(o == this) return true;
+			Constituent<T> c = (Constituent<T>) o;
+			return ((c.begin == begin) && (c.end == end) && c.sentence.getSequenceId() == sentence.getSequenceId());
 		}
 		return false;
 	}
@@ -128,14 +134,9 @@ public class Constituent<T> extends ArrayList<NonTerminal> implements IConstitue
 	 * @see org.schwiebert.abl4j.data.IConstituent#hashCode()
 	 */
 	@Override
-	/**
-	 * TODO: Check - is this correct? Constituents have the same hashcode
-	 * even if they are in different sequences... sequenceId should be
-	 * contained!
-	 */
 	public int hashCode() {
-		String s = begin + "_" + end;
-		return s.hashCode();
+		return ((begin << 13) *31+end)*31+sentence.getSequenceId();
+		
 	}
 
 	/* (non-Javadoc)
@@ -206,8 +207,8 @@ public class Constituent<T> extends ArrayList<NonTerminal> implements IConstitue
 	/* (non-Javadoc)
 	 * @see org.schwiebert.abl4j.data.IConstituent#getWords()
 	 */
-	public List<IWord<T>> getWords() {
-		return sentence.subList(begin, end);
+	public IWord<T>[] getWords() {
+		return sentence.subArray(begin, end);
 	}
 
 	/* (non-Javadoc)
@@ -221,8 +222,8 @@ public class Constituent<T> extends ArrayList<NonTerminal> implements IConstitue
 	 * (non-Javadoc)
 	 * @see org.schwiebert.abl4j.data.IConstituent#indexOf(org.schwiebert.abl4j.data.NonTerminal)
 	 */
-	public int indexOf(NonTerminal n) {
-		return super.indexOf(n);
+	public boolean contains(NonTerminal n) {
+		return nts.contains(n);
 	}
 
 	/*
@@ -230,15 +231,27 @@ public class Constituent<T> extends ArrayList<NonTerminal> implements IConstitue
 	 * @see org.schwiebert.abl4j.data.IConstituent#addAllNonTerminals(java.util.Collection)
 	 */
 	public boolean addAllNonTerminals(Collection<NonTerminal> nonTerminals) {
-		return super.addAll(nonTerminals);
+		return nts.addAll(nonTerminals);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see org.schwiebert.abl4j.data.IConstituent#containsNonTerminal(org.schwiebert.abl4j.data.NonTerminal)
-	 */
-	public boolean containsNonTerminal(NonTerminal nonTerminal) {
-		return super.contains(nonTerminal);
+	public int size() {
+		return nts.size();
+	}
+
+	public boolean add(NonTerminal n) {
+		return nts.add(n);
+	}
+
+	public void clear() {
+		nts.clear();
+	}
+
+	public NonTerminal getFirst() {
+		return nts.iterator().next();
+	}
+
+	public SortedSet<NonTerminal> getNonTerminals() {
+		return nts;
 	}
 
 	

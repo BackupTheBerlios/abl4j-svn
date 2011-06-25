@@ -18,6 +18,9 @@
  **********************************************************************/
 package org.schwiebert.abl4j.cluster.methods;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.log4j.Logger;
 import org.schwiebert.abl4j.cluster.AblNtMap;
 import org.schwiebert.abl4j.data.IConstituent;
@@ -35,7 +38,6 @@ import org.schwiebert.abl4j.util.PropertiesMap;
  *         (Java-Implementation)
  * 
  */
-@SuppressWarnings("unchecked")
 public class ABLClusterMethod implements ClusterMethod<AblNtMap>, MergeMethod<AblNtMap> {
 
 	private Logger logger = Logger.getLogger(ABLClusterMethod.class);
@@ -86,13 +88,15 @@ public class ABLClusterMethod implements ClusterMethod<AblNtMap>, MergeMethod<Ab
 				logger.error("Empty constituent found in tree " + t.getSequenceId());
 				continue;
 			}
-			NonTerminal i = c.get(0);
+			NonTerminal i = c.getFirst();
 			
 			// get new NT for first old NT
 			ntNew = ntm.getNewNT(t, c, i);
 			// take the next NT:
-			for (int x = 1; x < c.size(); x++) {
-				i = c.get(x);
+			final List<NonTerminal> nts = new ArrayList<NonTerminal>(c.getNonTerminals());
+			final int size = c.size();
+			for (int x = 1; x < size; x++) {
+				i = nts.get(x);
 				ntm.putNTmapping(i, ntNew);
 			}
 		}
@@ -112,9 +116,11 @@ public class ABLClusterMethod implements ClusterMethod<AblNtMap>, MergeMethod<Ab
 		NonTerminal ntNew;
 		// for each hypothesis in the tree
 		for (IConstituent<?> c : t.getConstituentStructure()) {
-			for (int x = 0; x < c.size(); x++) {
+			final List<NonTerminal> nts = new ArrayList<NonTerminal>(c.getNonTerminals());
+			final int size = nts.size();
+			for (int x = 0; x < size; x++) {
 				// get the first NT
-				NonTerminal i = c.get(x);
+				NonTerminal i = nts.get(x);
 				// get new NT for first old NT
 				ntNew = ntm.getNewNT(t, c, i);
 				// merge all remaining NTs to the first one

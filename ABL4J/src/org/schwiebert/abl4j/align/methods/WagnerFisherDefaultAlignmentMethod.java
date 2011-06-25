@@ -18,8 +18,8 @@
  **********************************************************************/
 package org.schwiebert.abl4j.align.methods;
 
-import org.schwiebert.abl4j.data.DataFactory;
 import org.schwiebert.abl4j.data.ISentence;
+import org.schwiebert.abl4j.data.IWord;
 import org.schwiebert.abl4j.distance.Alignment;
 import org.schwiebert.abl4j.distance.WFDefault;
 
@@ -32,10 +32,8 @@ public final class WagnerFisherDefaultAlignmentMethod extends WagnerFisherAlignm
 
 	@SuppressWarnings("unchecked")
 	protected Alignment findAlignment(ISentence s1, ISentence s2) {
-		ISentence s1A = DataFactory.newSentence();
-		s1A.addWords(s1.getWords());
-		ISentence s2A = DataFactory.newSentence();
-		s2A.addWords(s2.getWords());
-		return new WFDefault(s1A, 0, s1.size(), s2A, 0, s2.size()).getAlignment();
+		IWord[] w1 = s1.getWordArray();
+		IWord[] w2 = s2.getWordArray();
+		return new WFDefault(w1, 0, w1.length, w2, 0, w2.length).getAlignment();
 	}
 }

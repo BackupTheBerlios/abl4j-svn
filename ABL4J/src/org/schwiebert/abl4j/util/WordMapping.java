@@ -51,7 +51,9 @@ public class WordMapping<T> implements Serializable, IWordMapping<T> {
 	private final Map<Integer, Vector<Integer>> indexToSentence = new HashMap<Integer, Vector<Integer>>();
 	
 	public WordMapping(Comparator<T> comparator) {
-		wordToIndex = new TreeMap<T, Integer>(comparator);
+		// TODO: Why TreeMap?
+		wordToIndex = new HashMap<T, Integer>();
+//		wordToIndex = new TreeMap<T, Integer>(comparator);
 	}
 
 	/* (non-Javadoc)

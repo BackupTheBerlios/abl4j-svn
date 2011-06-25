@@ -49,14 +49,14 @@ public interface ITree<T> extends ISentence<T> {
 	/**
 	 * This procedure clears the entire tree (sentence and structure).
 	 */
-	public abstract void clear();
+	public abstract void clearTree();
 
 	/**
 	 * Removes all words currently contained in this Tree, and
 	 * adds all Word objects in <code>words</code>.
 	 * @param words
 	 */
-	public abstract void changeSentence(List<IWord<T>> words);
+	public abstract void changeSentence(IWord[] words);
 
 	/**
 	 * This procedure returns the number of hypotheses the tree contains
@@ -88,19 +88,12 @@ public interface ITree<T> extends ISentence<T> {
 	 */
 	public abstract double getSentenceScore();
 
-	/**
-	 * Adds {@link IWord} w to the list of words, as in
-	 * {@link List#add(Object)}
-	 * @param w
-	 */
-	public abstract void addWord(IWord<T> w);
-
-	/**
-	 * Adds the given list of words to the list of words already
-	 * contained in the {@link ITree}, as in {@link List#addAll(java.util.Collection)}
-	 * @param otherWords
-	 */
-	public abstract void addAllWords(List<IWord<T>> otherWords);
+//	/**
+//	 * Adds the given list of words to the list of words already
+//	 * contained in the {@link ITree}, as in {@link List#addAll(java.util.Collection)}
+//	 * @param otherWords
+//	 */
+//	public abstract void addAllWords(List<IWord<T>> otherWords);
 	
 
 

@@ -19,7 +19,7 @@
 package org.schwiebert.abl4j.align.methods;
 
 import java.util.Iterator;
-import java.util.Vector;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.schwiebert.abl4j.align.InsertMode;
@@ -85,7 +85,7 @@ public abstract class AbstractAdvancedMethod implements AlignmentMethod {
 	
 
 	@SuppressWarnings("unchecked")
-	protected final void handleEditOperationAlignment(final ITree t1, final ITree t2, final Vector<EditOperation> alignments) {
+	protected final void handleEditOperationAlignment(final ITree t1, final ITree t2, final List<EditOperation> alignments) {
 
 		InsertMode currentMode = InsertMode.NONE, nextWord = InsertMode.NONE;
 		Pair<Integer, Integer> begin = new Pair<Integer, Integer>(0, 0);
@@ -132,17 +132,17 @@ public abstract class AbstractAdvancedMethod implements AlignmentMethod {
 			final Iterator<IConstituent> c2pos = t2.findStructure(c2);
 			if (c1pos.hasNext()) {
 				if (c2pos.hasNext()) {
-					c1.add(c2pos.next().get(0));
-					c2.add(c1pos.next().get(0));
+					c1.add(c2pos.next().getFirst());
+					c2.add(c1pos.next().getFirst());
 					insertConstituent(t1, c1);
 					insertConstituent(t2, c2);
 				} else {
-					c2.add(c1pos.next().get(0));
+					c2.add(c1pos.next().getFirst());
 					insertConstituent(t2, c2);
 				}
 			} else {
 				if (c2pos.hasNext()) {
-					c1.add(c2pos.next().get(0));
+					c1.add(c2pos.next().getFirst());
 					insertConstituent(t1, c1);
 				} else {
 					final NonTerminal n = new NonTerminal();

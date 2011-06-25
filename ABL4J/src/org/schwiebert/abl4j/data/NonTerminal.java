@@ -35,7 +35,7 @@ import java.io.Serializable;
  *         (Java-Implementation)
  * 
  */
-public class NonTerminal implements Serializable {
+public class NonTerminal implements Serializable, Comparable<NonTerminal> {
 
 	private static final long serialVersionUID = 3264432434761762448L;
 
@@ -97,6 +97,14 @@ public class NonTerminal implements Serializable {
 			return ((NonTerminal) obj).value == value;
 		}
 		return false;
+	}
+	
+	
+
+	public int compareTo(NonTerminal arg0) {
+		if(arg0.value < value) return 1;
+		if(arg0.value > value) return -1;
+		return 0;
 	}
 
 	/**

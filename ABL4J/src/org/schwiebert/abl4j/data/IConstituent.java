@@ -22,6 +22,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.SortedSet;
 
 import org.schwiebert.abl4j.data.impl.abl.Constituent;
 
@@ -99,7 +100,7 @@ public interface IConstituent<T> {
 	 * Returns the list of words the constituent contains.
 	 * @return
 	 */
-	public abstract List<IWord<T>> getWords();
+	public abstract IWord<T>[] getWords();
 
 	/**
 	 * Returns the sentence to which this constituent belongs to.
@@ -112,20 +113,15 @@ public interface IConstituent<T> {
 	 * @param index
 	 * @return
 	 */
-	public abstract NonTerminal get(int index);
+	//public abstract NonTerminal get(int index);
+	
+	public abstract NonTerminal getFirst();
 
 	/**
 	 * Returns the number of NonTerminals
 	 * @return
 	 */
 	public abstract int size();
-
-	/**
-	 * Returns the index of NonTerminal n.
-	 * @param n
-	 * @return
-	 */
-	public abstract int indexOf(NonTerminal n);
 
 	/**
 	 * Adds a NonTerminal to the List of NonTerminals.
@@ -151,7 +147,7 @@ public interface IConstituent<T> {
 	 * @param nonTerminal
 	 * @return
 	 */
-	public abstract boolean containsNonTerminal(NonTerminal nonTerminal);
+	public abstract boolean contains(NonTerminal nonTerminal);
 
 	/**
 	 * Initializes the NonTerminal. Should only be called from {@link DataFactory}.
@@ -160,5 +156,7 @@ public interface IConstituent<T> {
 	 * @param end
 	 */
 	abstract void init(ISentence<T> sentence, int begin, int end);
+
+	public abstract SortedSet<NonTerminal> getNonTerminals();
 
 }

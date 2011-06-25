@@ -41,11 +41,11 @@ import org.schwiebert.abl4j.data.NonTerminal;
  *         (Java-Implementation)
  * 
  */
-public final class Tree<T> extends Sentence<T> implements ITree<T> {
+public class Tree<T> extends Sentence<T> implements ITree<T> {
 
 	private static final long serialVersionUID = 8341177889686401359L;
 
-	private final List<IConstituent<T>> structure = new ArrayList<IConstituent<T>>();
+	private List<IConstituent<T>> structure = new ArrayList<IConstituent<T>>();
 
 	/**
 	 * The probability of the sentence. Unless modified, the default value is
@@ -58,7 +58,7 @@ public final class Tree<T> extends Sentence<T> implements ITree<T> {
 	 */
 	public synchronized ITree<T> cloneTree() {
 		Tree<T> copy = new Tree<T>();
-		copy.addAll(this);
+		copy.setWords(words);
 		copy.structure.addAll(structure);
 		copy.score = score;
 		return copy;
@@ -82,23 +82,20 @@ public final class Tree<T> extends Sentence<T> implements ITree<T> {
 			structure.add(c);
 			return true;
 		} else {
-			final int constSize = c.size();
-			for(int i = 0; i < constSize; i++) {
-				final NonTerminal n = c.get(i);
+			for (NonTerminal n : c.getNonTerminals()) {
 				final IConstituent<T> x = structure.get(index);
-				if (x.indexOf(n) == -1) {
+				if (!x.contains(n)) {
 					x.add(n);
-				}
+				}	
 			}
 			return false;
 		}
 	}
 
 	/* (non-Javadoc)
-	 * @see org.schwiebert.abl4j.data.ITree#clear()
+	 * @see org.schwiebert.abl4j.data.ITree#clearTree()
 	 */
-	public void clear() {
-		super.clear();
+	public void clearTree() {
 		structure.clear();
 		setCommentLine("");
 	}
@@ -106,12 +103,8 @@ public final class Tree<T> extends Sentence<T> implements ITree<T> {
 	/* (non-Javadoc)
 	 * @see org.schwiebert.abl4j.data.ITree#changeSentence(java.util.List)
 	 */
-	public void changeSentence(List<IWord<T>> words) {
-		super.clear();
-		final int wordSize = words.size();
-		for(int i = 0; i < wordSize; i++) {
-			add(words.get(i));
-		}
+	public void changeSentence(IWord[] words) {
+		setWords(words);
 	}
 
 	/* (non-Javadoc)
@@ -142,7 +135,8 @@ public final class Tree<T> extends Sentence<T> implements ITree<T> {
 	@SuppressWarnings("unchecked")
 	public ISentence<T> createSubStructure(int begin, int end) {
 		ISentence<T> tree = DataFactory.newSentence();
-		tree.addWords(this.subList(begin, end));
+		IWord[] subList = this.subArray(begin, end);
+		tree.setWords(subList);
 		return tree;
 	}
 
@@ -160,21 +154,6 @@ public final class Tree<T> extends Sentence<T> implements ITree<T> {
 		return score;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see org.schwiebert.abl4j.data.ITree#addAllWords(java.util.List)
-	 */
-	public void addAllWords(List<IWord<T>> otherWords) {
-		super.addAll(otherWords);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see org.schwiebert.abl4j.data.ITree#addWord(org.schwiebert.abl4j.data.IWord)
-	 */
-	public void addWord(IWord<T> w) {
-		super.add(w);
-	}
 	
 	
 

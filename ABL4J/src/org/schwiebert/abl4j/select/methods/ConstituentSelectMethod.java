@@ -38,7 +38,7 @@ public class ConstituentSelectMethod extends AbstractSelectMethod {
 		int begin = cons.getBeginIndex();
 		int end = cons.getEndIndex();
 		ISentence s = t.createSubStructure(begin, end);
-		return new Phrase(s, t.getConstituentStructure().get(c).get(0));
+		return new Phrase(s, t.getConstituentStructure().get(c).getFirst());
 	}
 
 	@SuppressWarnings("unchecked")
@@ -49,7 +49,7 @@ public class ConstituentSelectMethod extends AbstractSelectMethod {
 		Phrase phrase = new Phrase(null, null);
 		for (IConstituent c : vc) {
 			phrase.first = t.createSubStructure(c.getBeginIndex(), c.getEndIndex());
-			phrase.second = c.get(0);
+			phrase.second = c.getFirst();
 			double r = computeProbability(phrase, prob);
 			c.setLocalScore(t.getSequenceId(), r);
 			p += r;

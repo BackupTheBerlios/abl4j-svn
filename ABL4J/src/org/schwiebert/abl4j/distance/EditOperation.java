@@ -20,8 +20,8 @@ package org.schwiebert.abl4j.distance;
 
 import java.util.ArrayList;
 
-import org.schwiebert.abl4j.data.ISentence;
 import org.schwiebert.abl4j.data.IWord;
+import org.schwiebert.abl4j.util.EditPair;
 import org.schwiebert.abl4j.util.Pair;
 
 
@@ -35,14 +35,13 @@ import org.schwiebert.abl4j.util.Pair;
  *         (Java-Implementation)
  * 
  */
-@SuppressWarnings("unchecked")
 public interface EditOperation {
 
 	/**
 	 * return the gamma value of the operation (the pair of ints are indices in
 	 * the sentences and 1 is the first word in the sentence)
 	 */
-	public Pair<Float, EditOperation> gamma(Pair<Integer, Integer> p);
+	public EditPair gamma(Pair<Integer, Integer> p);
 
 	/**
 	 * return the previous coordinates (when the operation was applied)
@@ -54,19 +53,19 @@ public interface EditOperation {
 	 */
 	public Pair<Integer, Integer> nextCoordinates(Pair<Integer, Integer> p);
 	
-	public final class Delete implements EditOperation {
+	public static final class Delete implements EditOperation {
 
-		protected final int begin1, end1, begin2, end2;
+		protected final short begin1, end1, begin2, end2;
 
 		public Delete(int b1, int e1, int b2, int e2) {
-			begin1 = b1;
-			end1 = e1;
-			begin2 = b2;
-			end2 = e2;
+			begin1 = (short) b1;
+			end1 = (short) e1;
+			begin2 = (short) b2;
+			end2 = (short) e2;
 		}
 
-		public Pair<Float, EditOperation> gamma(Pair<Integer, Integer> pair) {
-			return new Pair<Float, EditOperation>(1F, this);
+		public EditPair gamma(Pair<Integer, Integer> pair) {
+			return new EditPair(1F, this);
 		}
 
 		public Pair<Integer, Integer> previousCoordinates(Pair<Integer, Integer> p) {
@@ -78,7 +77,7 @@ public interface EditOperation {
 		}
 	}
 
-	public final class Insert implements EditOperation {
+	public static final class Insert implements EditOperation {
 
 		protected final int begin1, end1, begin2, end2;
 
@@ -89,8 +88,8 @@ public interface EditOperation {
 			end2 = e2;
 		}
 
-		public Pair<Float, EditOperation> gamma(Pair<Integer, Integer> pair) {
-			return new Pair<Float, EditOperation>(1F, this);
+		public EditPair gamma(Pair<Integer, Integer> pair) {
+			return new EditPair(1F, this);
 		}
 
 		public Pair<Integer, Integer> previousCoordinates(Pair<Integer, Integer> p) {
@@ -102,29 +101,29 @@ public interface EditOperation {
 		}
 	}
 
-	public class Substitute implements EditOperation {
+	public static class Substitute implements EditOperation {
 
-		protected final int begin1, end1, begin2, end2;
-		protected final ISentence sentence1, sentence2;
+		protected final short begin1, end1, begin2, end2;
+		protected final IWord[] sentence1, sentence2;
 
-		public Substitute(ISentence s1, int b1, int e1, ISentence s2, int b2, int e2) {
-			begin1 = b1;
-			end1 = e1;
+		public Substitute(IWord[] s1, int b1, int e1, IWord[] s2, int b2, int e2) {
+			begin1 = (short) b1;
+			end1 = (short) e1;
 			sentence1 = s1;
-			begin2 = b2;
-			end2 = e2;
+			begin2 = (short) b2;
+			end2 = (short) e2;
 			sentence2 = s2;
 		}
 
-		public Pair<Float, EditOperation> gamma(Pair<Integer, Integer> pair) {
+		public EditPair gamma(Pair<Integer, Integer> pair) {
 			if ((pair.first <= 0) || (pair.second <= 0))
-				return new Pair<Float, EditOperation>(2F, this);
-			final IWord w1 = sentence1.get(begin1 + pair.first - 1);
-			final IWord w2 = sentence2.get(begin2 + pair.second - 1);
+				return new EditPair(2F, this);
+			final IWord w1 = sentence1[begin1 + pair.first - 1];
+			final IWord w2 = sentence2[begin2 + pair.second - 1];
 			if (w1.equals(w2)) {
-				return new Pair<Float, EditOperation>(0F, this);
+				return new EditPair(0F, this);
 			}
-			return new Pair<Float, EditOperation>(2F, this);
+			return new EditPair(2F, this);
 		}
 
 		public Pair<Integer, Integer> previousCoordinates(Pair<Integer, Integer> p) {
@@ -136,18 +135,18 @@ public interface EditOperation {
 		}
 
 		boolean match(Pair<Integer, Integer> p) {
-			return (sentence1.get(begin1 + p.first - 1).equals(sentence2.get(begin2 + p.second - 1)));
+			return (sentence1[begin1 + p.first - 1].equals(sentence2[begin2 + p.second - 1]));
 		}
 
 	}
 
-	public final class SubDis extends Substitute implements EditOperation {
+	public static final class SubDis extends Substitute implements EditOperation {
 
 		// TODO: How are these values generated in original version???
 		// private static int len1 = 134715680, len2 = 32;
 		private int len1 = 0, len2 = 0;
 
-		public SubDis(ISentence s1, int b1, final int e1, ISentence s2, int b2, final int e2) {
+		public SubDis(IWord[] s1, int b1, final int e1, IWord[] s2, int b2, final int e2) {
 			super(s1, b1, e1, s2, b2, e2);
 			for (; b2 != e2; b2++) {
 				len2++;
@@ -160,16 +159,16 @@ public interface EditOperation {
 		/**
 		 * mat=((index_S/|S|)-(index_T/|T|))*mean(|S|,|T|)
 		 */
-		public Pair<Float, EditOperation> gamma(Pair<Integer, Integer> pair) {
+		public EditPair gamma(Pair<Integer, Integer> pair) {
 			if ((pair.first <= 0) || (pair.second <= 0))
-				return new Pair<Float, EditOperation>(2F, this);
-			if (sentence1.get(begin1 + pair.first - 1).equals(sentence2.get(begin2 + pair.second - 1))) {
+				return new EditPair(2F, this);
+			if (sentence1[begin1 + pair.first - 1].equals(sentence2[begin2 + pair.second - 1])) {
 				float f = pair.first;
 				float s = pair.second;
 				float value = (Math.abs((float) ((f - 1) / len1) - (float) ((s - 1) / len2)) * (len1 + len2) / 2f);
-				return new Pair<Float, EditOperation>(value, this);
+				return new EditPair(value, this);
 			}
-			return new Pair<Float, EditOperation>(2F, this);
+			return new EditPair(2F, this);
 		}
 
 	}
@@ -178,7 +177,7 @@ public interface EditOperation {
 
 		private static final long serialVersionUID = -1442952554877131035L;
 
-		public Default(ISentence s1, int b1, int e1, ISentence s2, int b2, int e2) {
+		public Default(IWord[] s1, int b1, int e1, IWord[] s2, int b2, int e2) {
 			super(3);
 			add(new Insert(b1, e1, b2, e2));
 			add(new Delete(b1, e1, b2, e2));
@@ -191,7 +190,7 @@ public interface EditOperation {
 
 		private static final long serialVersionUID = -5884292503919273118L;
 
-		public Biased(ISentence s1, int b1, int e1, ISentence s2, int b2, int e2) {
+		public Biased(IWord[] s1, int b1, int e1, IWord[] s2, int b2, int e2) {
 			super(3);
 			add(new Insert(b1, e1, b2, e2));
 			add(new Delete(b1, e1, b2, e2));

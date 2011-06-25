@@ -23,6 +23,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -83,20 +84,24 @@ public class TigerCorpusReader implements ITreebankReader {
 			List<Element> children = root.getChildren();
 			HashMap<String, Object> internalMapping = new HashMap<String, Object>();
 			int cnt = 0;
+			List<IWord> temp = new ArrayList<IWord>();
 			for (Iterator<Element> it = children.iterator(); it.hasNext();) {
 				Element s = it.next();
 				Element terminals = s.getChild("graph").getChild("terminals");
 				ITree tree = DataFactory.newTree();
 				List<Element> ts = terminals.getChildren("t");
 				int counter = 0;
+				temp.clear();
 				for (Iterator<Element> iter = ts.iterator(); iter.hasNext();) {
 					Element t = iter.next();
 					String word = t.getAttributeValue("word");
 					IWord w = DataFactory.getWord(word);
 					String id = t.getAttributeValue("id");
 					internalMapping.put(id, counter++);
-					tree.addWord(w);
 				}
+				IWord[] words = new IWord[temp.size()];
+				temp.toArray(words);
+				tree.setWords(words);
 				if (!ignoreAnnotations) {
 					Element nonterminals = s.getChild("graph").getChild("nonterminals");
 					List<Element> nts = nonterminals.getChildren("nt");

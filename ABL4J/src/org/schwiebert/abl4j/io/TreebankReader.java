@@ -24,6 +24,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.schwiebert.abl4j.InvalidConfigurationException;
@@ -262,12 +264,16 @@ public class TreebankReader implements ITreebankReader {
 	 * @param currentLine
 	 */
 	private void readSentence(final ITree t, final String currentLine) {
-		t.clear();
+		t.clearTree();
 		IWord word = null;
 		indexInCurrentLine = 0;
+		List<IWord> words = new ArrayList<IWord>();
 		while ((word = readWord(currentLine)) != null) {
-			t.addWord(word);
+			words.add(word);
 		}
+		IWord[] array = new IWord[words.size()];
+		words.toArray(array);
+		t.setWords(array);
 	}
 
 	/**

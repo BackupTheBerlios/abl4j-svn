@@ -72,6 +72,8 @@ public interface ITreeBank<T> {
 	 * @return the number of constituents
 	 */
 	public abstract int getNumberOfConstituents();
+	
+	public int getNumberOfUniqueNonTerminals();
 
 	/**
 	 * Returns the number of {@link ITree}-objects stored
