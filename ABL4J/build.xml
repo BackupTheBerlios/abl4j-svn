@@ -37,6 +37,7 @@
 	
 	<target name="build.javadoc">
 		<echo level="info">Building javadoc...</echo>
+		<mkdir dir="doc/api"/>
 		<delete>
 			<fileset dir="doc/api">
 			    <include name="*/**"/>
@@ -102,7 +103,7 @@
 		<mkdir dir="temp/testdata/selected"/>
 		<mkdir dir="temp/testdata/input"/>
 		<copy file="testdata/input/input.txt" todir="temp/testdata/input"/>
-		<copy file="documentation/UserDocumentation.pdf" tofile="temp/ABL4J-${version} Reference Guide.pdf"/>
+		<copy failonerror="false" file="documentation/UserDocumentation.pdf" tofile="temp/ABL4J-${version} Reference Guide.pdf"/>
 		<jar destfile="dist/abl4j-${version}.bin.zip">
 			<zipfileset dir="temp" includes = "**/*"/>
 		</jar>
