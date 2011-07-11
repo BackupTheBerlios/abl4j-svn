@@ -1,9 +1,113 @@
-she works well
-she sings well
-she listens well
-she sings very well
-she works badly
-he sings well
-she works very well
-he listens badly
-she is silly
+Peter gibt Maria einen Kuß
+Peter gibt Maria ein Buch
+Peter gibt Maria auf
+Maria gibt Peter einen Korb
+Maria gibt Peter nicht auf
+Otto gibt Peter ein Buch
+Maria gibt Peter ein Buch
+Otto gibt Peter nicht auf
+Otto gibt Maria einen Kuß
+Maria gibt Otto einen Kuß
+Peter gibt Otto keinen Kuß
+Peter liest ein Buch
+Peter liest eine Zeitung
+Maria liest eine Zeitschrift
+Otto liest nicht
+Maria liest etwas lustiges über Peter
+Otto liest etwas lustiges über Peter 
+Peter schlägt Otto
+Otto hasst Peter
+Otto hasst Maria
+Peter schlägt Maria
+Peter geht in die Uni
+Maria geht in die Schule
+Otto geht in das Gefängnis
+Peter besucht Otto im Gefängnis
+Maria besucht Peter in der Uni
+Niemand besucht Maria in der Schule
+Otto wird von Peter im Gefängnis besucht
+Maria wird in der Schule von niemandem besucht
+Peter will nicht ins Gefängnis
+Otto will aus dem Gefängnis
+Maria kommt wohl auch bald ins Gefängnis
+Peter will nicht in die Uni
+Maria will nicht in die Schule
+Peter will in die Türkei
+Maria will in den Zoo
+Otto will mit Peter in den Zoo
+Peter will mit Maria in den Zoo
+Der Elefant will aus dem Zoo
+Der Affe will aus dem Zoo
+Peter geht Einkaufen
+Peter kauft Butter
+Peter kauft Wasser
+Peter kauft Brot
+Peter kauft Cola
+Peter kauft Fanta
+Peter kauft Klopapier
+Wasser ist durchsichtig
+Cola ist schwarz
+Fanta ist gelb
+Kaffee ist schwarz
+Peter kauft Kaffee
+Peter trinkt Cola
+Peter trinkt Fanta
+Peter trinkt Kaffee
+Maria trinkt Cola
+Otto trinkt Kaffee
+Peter isst Brot
+Maria isst Butter
+Otto isst nichts
+Peter wird Busfahrer
+Maria wird Topmodel
+Otto wird Serienmörder
+Peter trifft Maria
+Maria trifft Peter
+Peter fährt nach Bonn
+Maria fährt nach Köln
+Otto fährt ein
+Peter fliegt nach Wien
+Maria fliegt nach Wien
+Peter fliegt nach Hamburg
+Maria fliegt nach Berlin
+Peter fliegt in den Urlaub
+Maria fliegt nach Hause
+Peter reist mit dem Flugzeug
+Maria reist mit dem Zug
+Otto reist nicht
+Maria geht es gut
+Otto geht es gut
+Peter geht es nicht gut
+Maria geht es auch gut
+Peter geht es wieder besser
+Otto geht es schlecht
+Peter geht es gut
+Otto geht es nicht schlecht
+Maria geht es auch nicht schlecht
+Maria geht es gut
+Peter geht es ganz ok
+Maria geht es besser als gestern
+Otto geht es schlechter als gestern
+Otto wird bald entlassen
+Maria holt Otto ab
+Peter holt Otto ab
+Otto geht es ziemlich schlecht
+Otto tötet Maria
+Otto tötet Peter
+Peter ist tot
+Maria ist tot
+Otto kommt wieder ins Gefängnis
+Maria kommt in den Himmel
+Peter kommt in die Hölle
+Otto kommt nie wieder frei
+Otto tötet einen Wärter
+Otto tötet noch einen Wärter
+Otto tötet zwei Gefangene
+Otto tötet sich
+Otto kommt in den Himmel
+Ende der Geschichte
+Der Peter und der Otto und die Maria sind schlecht oder nicht schlecht, hängt ab von diesem und von jenem
+Peter
+Karl
+Peter geht
+Neuer Satz ohne geteiltes Vokabular
