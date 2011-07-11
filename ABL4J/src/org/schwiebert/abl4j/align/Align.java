@@ -18,9 +18,6 @@
  **********************************************************************/
 package org.schwiebert.abl4j.align;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.apache.log4j.Logger;
 import org.schwiebert.abl4j.IAblComponent;
 import org.schwiebert.abl4j.InvalidConfigurationException;
@@ -48,11 +45,6 @@ public class Align implements IAblComponent {
 	private final Logger logger = Logger.getLogger(Align.class);
 
 	/**
-	 * Global treebank: this is where all the data is stored
-	 */
-	private ITreeBank tb;
-
-	/**
 	 * The alignment method used for the alignment
 	 */
 	private AlignmentMethod alignmentMethod;
@@ -68,86 +60,50 @@ public class Align implements IAblComponent {
 			this.properties = properties;
 			alignmentMethod = (AlignmentMethod) properties.getInitializer().getNewClassInstance(AblProperties.ALIGN_TYPE);
 			alignmentMethod.configure(properties);
+			exhaustive = properties.getBoolean(AblProperties.EXHAUSTIVE);
 		} catch (Exception e) {
 			throw new InvalidConfigurationException(e);
 		}
-	}
-
-	final class StructureThread extends Thread {
-
-		private int mod;
-		private int offset;
-		private int counter = 0;
-		private long startTime = 0;
-		private final int LOG_MSG;
-
-		public StructureThread(int threads, int i, int log) {
-			this.mod = threads;
-			this.offset = i;
-			LOG_MSG = log;
-		}
-
-		public void run() {
-			setName("Structurize " + offset);
-			startTime = System.currentTimeMillis();
-			final int tbSize = tb.size();
-			for (int i = 0; i < tbSize; i++) {
-				counter++;
-				if (counter % LOG_MSG == 0) {
-					long time = System.currentTimeMillis() - startTime;
-					startTime = System.currentTimeMillis();
-					logger.info("Thread " + offset + ": " + LOG_MSG / mod + " sequences aligned in " + (time / 1000) + " seconds. " + (tb.size() - i)
-							/ mod + " sequences remaining, FreeMem: " + Runtime.getRuntime().freeMemory());
-				}
-				if (i % mod != offset)
-					continue;
-				final ITree<?> current = tb.get(i);
-				logger.debug("Aligning sequence " + i);
-				// start symbol
-				IConstituent c = DataFactory.newConstituent(current, 0, current.size());
-				c.setLocalScore(0, 0);
-				c.add(start);
-				current.addStructure(c);
-				// edit distance alignment
-				if (!exhaustive) {
-					current.buildSimilarSentencesSet();
-				}
-				alignmentMethod.handleEditOperationStructure(tb, current);
-				// tb.incrementCurrentIndex();
-			}
-		}
-
 	}
 
 	public void execute(ITreeBank tb) {
 		if (alignmentMethod == null) {
 			throw new RuntimeException("AlignmentMethod has not been defined!");
 		}
-		this.tb = tb;
 		exhaustive = properties.getBoolean(AblProperties.EXHAUSTIVE);
 		logger.info("Finding structure");
-		final int threads = properties.getInteger(AblProperties.THREADS);
-		final List<StructureThread> threadsList = new ArrayList<StructureThread>(threads);
-		if (threads <= 1) {
-			logger.info("Running align single threaded");
-			new StructureThread(threads, 0, 500).run();
-		} else {
-			logger.info("Running align multi threaded ( " + threads + ")");
-			for (int i = 0; i < threads; i++) {
-				logger.info("Starting thread " + i);
-				StructureThread thread = new StructureThread(threads, i, 500 * threads);
-				threadsList.add(thread);
-				thread.start();
+		final int tbSize = tb.size();
+		for (int i = 0; i < tbSize; i++) {
+			final ITree<?> current = tb.get(i);
+			logger.debug("Aligning sequence " + i);
+			// start symbol
+			IConstituent c = DataFactory.newConstituent(current, 0, current.size());
+			c.setLocalScore(0, 0);
+			c.add(start);
+			current.addStructure(c);
+			// edit distance alignment
+			if (!exhaustive) {
+				current.buildSimilarSentencesSet();
 			}
-		}
-		try {
-			for (StructureThread thread : threadsList) {
-				thread.join();
-			}
-		} catch (InterruptedException e1) {
-			e1.printStackTrace();
+			alignmentMethod.handleEditOperationStructure(tb, current);
 		}
 		logger.info("Align completed");
+	}
+	
+	public ITree process(ITreeBank tb) {
+		final ITree<?> current = tb.get(0);
+		// start symbol
+		IConstituent c = DataFactory.newConstituent(current, 0, current.size());
+		//c.setLocalScore(0, 0);
+		c.add(start);
+		current.addStructure(c);
+		// edit distance alignment
+		if (!exhaustive) {
+			current.buildSimilarSentencesSet();
+		}
+		alignmentMethod.handleEditOperationStructure(tb, current);
+		tb.deleteTree(0);
+		return current;
 	}
 
 }

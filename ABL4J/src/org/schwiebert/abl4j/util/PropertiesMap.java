@@ -33,14 +33,12 @@ public final class PropertiesMap extends Properties {
 		this.initializer = initializer;
 	}
 
-	@SuppressWarnings("unchecked")
 	public Class getClass(String propertyName) throws ClassNotFoundException {
 		String className = super.getProperty(propertyName);
 		Class theClass = Thread.currentThread().getContextClassLoader().loadClass(className);
 		return theClass;
 	}
 	
-	@SuppressWarnings("unchecked")
 	public Object getNewClassInstance(String propertyName) throws Exception {
 		Class cls = getClass(propertyName);
 		return cls.newInstance();
@@ -61,7 +59,6 @@ public final class PropertiesMap extends Properties {
 	}
 	
 
-	@SuppressWarnings("unchecked")
 	public void logProperties() {
 		Logger logger = Logger.getLogger(PropertiesMap.class);
 		logger.info("Configuration:");
@@ -89,19 +86,19 @@ public final class PropertiesMap extends Properties {
 	public double getDouble(String property, double defaultValue) {
 		String value = getProperty(property);
 		if(value == null) return defaultValue;
-		return Double.parseDouble(property);
+		return Double.parseDouble(value);
 	}
 	
 	public int getInteger(String property, int defaultValue) {
 		String value = getProperty(property);
 		if(value == null) return defaultValue;
-		return Integer.parseInt(property);
+		return Integer.parseInt(value);
 	}
 	
 	public boolean getBoolean(String property, boolean defaultValue) {
 		String value = getProperty(property);
 		if(value == null) return defaultValue;
-		return Boolean.parseBoolean(property);
+		return Boolean.parseBoolean(value);
 	}
 	
 	public char getCharacter(String property, char defaultValue) {
@@ -113,7 +110,7 @@ public final class PropertiesMap extends Properties {
 	public long getLong(String property, long defaultValue) {
 		String value = getProperty(property);
 		if(value == null) return defaultValue;
-		return Long.parseLong(property);
+		return Long.parseLong(value);
 	}
 	
 	public String getString(String property, String defaultValue) {

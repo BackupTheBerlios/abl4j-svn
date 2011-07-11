@@ -148,12 +148,10 @@ public abstract class AbstractSelectMethod implements SelectMethod {
 	}
 
 	private void computeProbabilities(ITreeBank tb, ProbabilityStore prob) {
-		int treenr = 1;
 		if (!preserve) {
 			final int size = tb.size();
 			for(int i = 0; i < size; i++) {
 				ITree<?> tree = tb.get(i);
-				treenr++;
 				computeProbabilitiesInTree(tree, prob);
 			}
 		} else {

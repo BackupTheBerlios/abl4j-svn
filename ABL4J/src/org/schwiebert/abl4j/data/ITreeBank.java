@@ -136,4 +136,6 @@ public interface ITreeBank<T> {
 	 */
 	public abstract void addAllTrees(Collection<ITree<T>> trees);
 
+	public abstract void deleteTree(int index);
+
 }

@@ -18,7 +18,7 @@
  **********************************************************************/
 package org.schwiebert.abl4j.select;
 
-import org.schwiebert.abl4j.util.Pair;
+import org.schwiebert.abl4j.util.IntegerPair;
 
 /**
  * Helper class that represents a Range
@@ -26,7 +26,7 @@ import org.schwiebert.abl4j.util.Pair;
  * @author sschwieb
  * 
  */
-public final class Range extends Pair<Integer, Integer> {
+public final class Range extends IntegerPair {
 
 	private static final long serialVersionUID = 8745463627933681844L;
 

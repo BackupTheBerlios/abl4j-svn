@@ -16,35 +16,35 @@
  * Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
  * Boston, MA  02110-1301, USA.
  **********************************************************************/
-package org.schwiebert.abl4j.align.methods;
+package org.schwiebert.abl4j.util;
 
-import org.schwiebert.abl4j.data.DataFactory;
-import org.schwiebert.abl4j.data.IConstituent;
-import org.schwiebert.abl4j.data.ITree;
-import org.schwiebert.abl4j.data.ITreeBank;
-import org.schwiebert.abl4j.data.NonTerminal;
-import org.schwiebert.abl4j.util.PropertiesMap;
 
 /**
- * Implements the "right"-alignment of ABL
- * @author sschwieb
- *
+ * Helper class that represents a pair of two {@link Object}s.
+ * 
+ * @author Stephan Schwiebert (sschwieb@spinfo.uni-koeln.de)
  */
-public class RightAlignmentMethod implements AlignmentMethod {
+public class IntegerPair extends Pair<Integer,Integer> {
 
-	public void configure(PropertiesMap properties) {}
-	
-	@SuppressWarnings("unchecked")
-	public void handleEditOperationStructure(ITreeBank tb, ITree current) {
-		int end = current.size();
-		final int treeSize = current.size();
-		for (int i = 1; i != treeSize; ++i) {
-			IConstituent c = DataFactory.newConstituent(current, Math.min(i, end), Math.max(i, end));
-			c.add(NonTerminal.newNonTerminal());
-			current.addStructure(c);
-		}
+	private static final long serialVersionUID = 6722692557830611787L;
 
+
+	public IntegerPair(final Integer a, final Integer b) {
+		this.first = a;
+		this.second = b;
 	}
+
+	@Override
+	public Integer getFirst() {
+		return first;
+	}
+	@Override
+	public Integer getSecond() {
+		return second;
+	}
+
+	private final int first;
+	private final int second;
 
 
 }

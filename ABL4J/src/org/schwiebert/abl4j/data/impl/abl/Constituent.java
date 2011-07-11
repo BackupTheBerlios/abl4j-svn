@@ -26,13 +26,12 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.SortedSet;
-import java.util.TreeSet;
 
 import org.schwiebert.abl4j.data.IConstituent;
 import org.schwiebert.abl4j.data.ISentence;
 import org.schwiebert.abl4j.data.IWord;
 import org.schwiebert.abl4j.data.NonTerminal;
+import org.schwiebert.abl4j.util.AblProperties;
 
 
 /**
@@ -49,16 +48,17 @@ public class Constituent<T> implements IConstituent<T>, Serializable {
 
 	private static final long serialVersionUID = -2954053640070134123L;
 	
-	private final SortedSet<NonTerminal> nts = new TreeSet<NonTerminal>();
+	//private final Set<NonTerminal> nts = new GoogleHashSet<NonTerminal>();
 	
+	private final List<NonTerminal> nts = new ArrayList<NonTerminal>(4);
 
 	// data members
 	/**
 	 * The boundaries of the constituent.
 	 */
-	private int begin;
+	private short begin;
 
-	private int end;
+	private short end;
 
 	/**
 	 * ABL4J extension: If an alignment or selection algorithm supports
@@ -88,8 +88,8 @@ public class Constituent<T> implements IConstituent<T>, Serializable {
 	 */
 	public void init(ISentence<T> sentence, int begin, int end) {
 		this.sentence = sentence;
-		this.begin = begin;
-		this.end = end;
+		this.begin = (short) begin;
+		this.end = (short) end;
 	}
 
 	/* (non-Javadoc)
@@ -160,7 +160,7 @@ public class Constituent<T> implements IConstituent<T>, Serializable {
 	 */
 	public void setLocalScore(int sentenceId, double score) {
 		if(sentenceToScore == null) {
-			sentenceToScore = new HashMap<Integer, Double>();
+			sentenceToScore = new HashMap<Integer, Double>(2);
 		}
 		if (this.sentenceToScore.containsKey(sentenceId) && sentenceToScore.get(sentenceId) != score) {
 			//logger.warn("Overriding probability " + this.sentenceToProbability.get(sentenceId) + " with " + probability);
@@ -171,9 +171,8 @@ public class Constituent<T> implements IConstituent<T>, Serializable {
 	/* (non-Javadoc)
 	 * @see org.schwiebert.abl4j.data.IConstituent#getLocalScoreMap()
 	 */
-	@SuppressWarnings("unchecked")
 	public Map<Integer, Double> getLocalScoreMap() {
-		if(sentenceToScore == null) return Collections.EMPTY_MAP;
+		if(sentenceToScore == null) return Collections.emptyMap();
 		return sentenceToScore;
 	}
 
@@ -223,23 +222,34 @@ public class Constituent<T> implements IConstituent<T>, Serializable {
 	 * @see org.schwiebert.abl4j.data.IConstituent#indexOf(org.schwiebert.abl4j.data.NonTerminal)
 	 */
 	public boolean contains(NonTerminal n) {
-		return nts.contains(n);
+		return Collections.binarySearch(nts, n) > 0;
+		//return nts.contains(n);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see org.schwiebert.abl4j.data.IConstituent#addAllNonTerminals(java.util.Collection)
-	 */
-	public boolean addAllNonTerminals(Collection<NonTerminal> nonTerminals) {
-		return nts.addAll(nonTerminals);
-	}
+//	/*
+//	 * (non-Javadoc)
+//	 * @see org.schwiebert.abl4j.data.IConstituent#addAllNonTerminals(java.util.Collection)
+//	 */
+//	public boolean addAllNonTerminals(Collection<NonTerminal> nonTerminals) {
+//		return nts.addAll(nonTerminals);
+//	}
 
 	public int size() {
 		return nts.size();
 	}
 
 	public boolean add(NonTerminal n) {
-		return nts.add(n);
+		// Inefficient, but required for compatibility with WF
+		if(nts.indexOf(n) == -1) {
+			nts.add(n);
+			return true;
+		} 
+		return false;
+//		int position = Collections.binarySearch(nts, n);			
+//		if(position >= 0) return false;
+//		nts.add(n);
+//		nts.add(-position-1, n);
+//		return true;
 	}
 
 	public void clear() {
@@ -247,10 +257,12 @@ public class Constituent<T> implements IConstituent<T>, Serializable {
 	}
 
 	public NonTerminal getFirst() {
-		return nts.iterator().next();
+		return nts.get(0);
+		// FIXME: This does not return the first, but any!
+	//	return nts.iterator().next();
 	}
 
-	public SortedSet<NonTerminal> getNonTerminals() {
+	public Collection<NonTerminal> getNonTerminals() {
 		return nts;
 	}
 

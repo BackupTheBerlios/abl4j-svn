@@ -64,7 +64,7 @@ public class EditDistance {
 		int opCounter = 0;
 		EditOperation op = operations[opCounter++];
 		Pair<Integer, Integer> prev = op.previousCoordinates(p);
-		while ((prev.first < 0) || (prev.second < 0)) {
+		while ((prev.getFirst() < 0) || (prev.getSecond() < 0)) {
 			op = operations[opCounter++];
 			if (op == operations[operations.length-1]) {
 				throw new RuntimeException("Bad_operations");
@@ -72,13 +72,13 @@ public class EditDistance {
 			prev = op.previousCoordinates(p);
 		}
 		EditPair min = op.gamma(p);
-		min.first += matrix[prev.first][prev.second];
+		min.first += matrix[prev.getFirst()][prev.getSecond()];
 		while(opCounter < operations.length) {
 			op = operations[opCounter++];
 			prev = op.previousCoordinates(p);
-			if ((prev.first >= 0) && (prev.second >= 0)) {
+			if ((prev.getFirst() >= 0) && (prev.getSecond() >= 0)) {
 				EditPair next = op.gamma(p);
-				next.first += matrix[prev.first][prev.second];
+				next.first += matrix[prev.getFirst()][prev.getSecond()];
 				if (next.first < min.first) {
 					min = next;
 				}

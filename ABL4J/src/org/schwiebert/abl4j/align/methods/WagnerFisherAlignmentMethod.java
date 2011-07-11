@@ -43,6 +43,7 @@ public abstract class WagnerFisherAlignmentMethod extends AbstractAdvancedMethod
 	public void configure(PropertiesMap properties) {
 		super.configure(properties);
 		EXHAUSTIVE = properties.getBoolean(AblProperties.EXHAUSTIVE);
+		//System.out.println(properties);
 	}
 
 

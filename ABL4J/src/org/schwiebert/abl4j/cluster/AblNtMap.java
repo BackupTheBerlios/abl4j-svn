@@ -72,7 +72,7 @@ public class AblNtMap extends HashMap<NonTerminal, NonTerminal> implements NonTe
 
 		if (!contained) {
 			// no -> create new NT
-			NonTerminal ntNew = new NonTerminal(upperNtNew++);
+			NonTerminal ntNew = NonTerminal.newNonTerminal(upperNtNew++);
 			putNTmapping(ntOld, ntNew);
 			return ntNew;
 		} else {

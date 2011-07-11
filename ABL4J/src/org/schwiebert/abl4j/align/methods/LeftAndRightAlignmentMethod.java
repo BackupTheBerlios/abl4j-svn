@@ -49,7 +49,7 @@ public class LeftAndRightAlignmentMethod implements AlignmentMethod {
 		int end = (a == right) ? current.size() : 0;
 		final int treeSize = current.size();
 		for (int i = 1; i != treeSize; ++i) {
-			NonTerminal n = new NonTerminal();
+			NonTerminal n = NonTerminal.newNonTerminal();
 			IConstituent c = DataFactory.newConstituent(current, Math.min(i, end), Math.max(i, end));
 			c.add(n);
 			current.addStructure(c);

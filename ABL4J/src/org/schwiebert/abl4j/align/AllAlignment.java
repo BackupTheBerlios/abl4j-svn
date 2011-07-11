@@ -18,7 +18,9 @@
  **********************************************************************/
 package org.schwiebert.abl4j.align;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
@@ -28,7 +30,6 @@ import org.schwiebert.abl4j.data.ITree;
 import org.schwiebert.abl4j.data.IWord;
 import org.schwiebert.abl4j.distance.Alignment;
 import org.schwiebert.abl4j.distance.EditOperation;
-import org.schwiebert.abl4j.util.Pair;
 import org.schwiebert.abl4j.util.Tools;
 
 
@@ -85,25 +86,25 @@ public final class AllAlignment {
 		
 		@Override
 		public int hashCode() {
-			return (first << 13) * 31 + second;
+			return first * 569 + second;
 		}
 
 	}
 
-	final class LinkList extends TreeSet<Link> {
+	final static class LinkList extends TreeSet<Link> {
 
 		private static final long serialVersionUID = -6239132255101204160L;
 
 
 	}
 
-	final class SetLinkList extends Vector<LinkList> {
+	final static class SetLinkList extends ArrayList<LinkList> {
 
 		private static final long serialVersionUID = 6995244181986057703L;
 
 	}
 
-	final class In<E> implements Predicate<E> {
+	final static class In<E> implements Predicate<E> {
 
 		final Set<E> elem;
 
@@ -117,7 +118,7 @@ public final class AllAlignment {
 
 	}
 
-	final class Overlap implements Predicate<Link> {
+	final static class Overlap implements Predicate<Link> {
 
 		private final Link link;
 
@@ -132,7 +133,7 @@ public final class AllAlignment {
 
 	}
 
-	final class Subset implements Predicate<LinkList> {
+	final static class Subset implements Predicate<LinkList> {
 
 		private final LinkList link;
 
@@ -141,18 +142,10 @@ public final class AllAlignment {
 		}
 
 		public boolean matches(LinkList e) {
-			HashSet<Link> s = new HashSet<Link>(e);
+			if(link.size() < e.size()) return false;
+				HashSet<Link> s = new HashSet<Link>(e);
 			s.removeAll(link);
 			return s.isEmpty();
-			
-/*			boolean result = true;
-			for (int i = 0; i < link.size(); i++) {
-				if (!e.contains(link.get(i))) {
-					result = false;
-					break;
-				}
-			}
-			return result;*/
 		}
 	}
 

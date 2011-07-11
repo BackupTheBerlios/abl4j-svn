@@ -16,17 +16,18 @@
  * Free Software Foundation, Inc., 51 Franklin St, Fifth Floor,
  * Boston, MA  02110-1301, USA.
  **********************************************************************/
-package org.schwiebert.abl4j.select;
+package org.schwiebert.abl4j.data;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import org.schwiebert.abl4j.data.ISentence;
-import org.schwiebert.abl4j.data.NonTerminal;
-import org.schwiebert.abl4j.util.Pair;
-
+import java.io.Serializable;
 
 /**
+ * This class is used to store a nonterminal. Creating a nonterminal actually
+ * gives an unused nonterminal ''constant''. Creating a nonterminals always
+ * returns a new, unique one. They are printed as integers. It is also possible
+ * to create a nonterminal by initialising it with an integer. However, it may
+ * be the case that when initialising the nonterminal with an integer, it is has
+ * the same value as an already existing one.
+ * 
  * 
  * @author Menno van Zaanen (menno@ics.mq.edu.au) (original C++ Version)
  * @author Jeroen Geertzen (j.geertzen@uvt.nl) (modifications in C++ Version)
@@ -34,37 +35,35 @@ import org.schwiebert.abl4j.util.Pair;
  *         (Java-Implementation)
  * 
  */
-public class ProbabilityStore {
+public class IntNonTerminal extends NonTerminal {
 
-	private final Map<Phrase, Integer> pstore = new HashMap<Phrase, Integer>();
-	private final Map<NonTerminal, Integer> nstore = new HashMap<NonTerminal, Integer>();
-
-	public synchronized int increase(Phrase phrase) {
-		int toReturn = 0;
-		Integer value = pstore.get(phrase);
-		if (value == null) {
-			value = 0;
+	private static final long serialVersionUID = -3423452939682167208L;
+	
+	private final int value;
+	
+	@Override
+	public long value() {
+		return value;
+	}
+	
+	public IntNonTerminal(long n) {
+		this.value = (int) n;
+		synchronized (NonTerminal.class) {
+			if (n >= upperNt.get().upperNT) {
+				upperNt.get().upperNT =n + 1;
+			}
 		}
-		value++;
-		pstore.put(phrase, value);
-		toReturn = value;
-		Integer value2 = nstore.get(phrase.second);
-		if (value2 == null)
-			value2 = 0;
-		nstore.put(phrase.second, value2 + 1);
-		return toReturn;
 	}
 
-	public int getCount(Phrase phrase) {
-		Integer value = pstore.get(phrase);
-		if(value == null) {
-			System.out.println("NO PHRASE FOUND: " + phrase + ", " + pstore.size());
+	/**
+	 * Creates a new Nonterminal whose value will be the
+	 * currently largest value.
+	 */
+	public IntNonTerminal() {
+		synchronized(upperNt) {
+			value = (int) (upperNt.get().upperNT + 1);
+			upperNt.get().upperNT = value;
 		}
-		return value.intValue();
 	}
-
-	public int getCount(NonTerminal nonterm) {
-		return nstore.get(nonterm);
-	}
-
+	
 }

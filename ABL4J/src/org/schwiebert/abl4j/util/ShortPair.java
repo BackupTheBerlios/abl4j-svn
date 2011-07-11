@@ -25,9 +25,19 @@ import java.io.Serializable;
  * 
  * @author Stephan Schwiebert (sschwieb@spinfo.uni-koeln.de)
  */
-public abstract class Pair<A, B> implements Serializable {
+public class ShortPair<A, B> implements Serializable {
 
 	private static final long serialVersionUID = 6722692557830611787L;
+
+
+	public ShortPair(final short a, final short b) {
+		this.first = a;
+		this.second = b;
+	}
+
+	public final short first;
+	public final short second;
+
 	
 	/**
 	 * Returns <code>true</code> if <code>this.first</code> equals <code>obj.first</code> and 
@@ -37,7 +47,7 @@ public abstract class Pair<A, B> implements Serializable {
 	@Override
 	public boolean equals(Object obj) {
 		try {
-			return getFirst().equals(((Pair) obj).getFirst()) && getSecond().equals(((Pair) obj).getSecond());
+			return first == (((ShortPair) obj).first) && second == (((ShortPair) obj).second);
 		} catch (ClassCastException e) {
 			return false;
 		}
@@ -48,7 +58,7 @@ public abstract class Pair<A, B> implements Serializable {
 	 */
 	@Override
 	public int hashCode() {
-		return getFirst().hashCode() * 31 + getSecond().hashCode();
+		return first * 31 + second;
 	}
 	
 	/*
@@ -56,12 +66,7 @@ public abstract class Pair<A, B> implements Serializable {
 	 */
 	@Override
 	public String toString() {
-		return "[" + getFirst() + ", " + getSecond() + "]";
+		return "[" + first + ", " + second + "]";
 	}
-
-
-	public abstract A getFirst();
-	
-	public abstract B getSecond();
 
 }

@@ -38,6 +38,7 @@ import org.schwiebert.abl4j.data.ITree;
 import org.schwiebert.abl4j.data.ITreeBank;
 import org.schwiebert.abl4j.data.IWord;
 import org.schwiebert.abl4j.util.AblProperties;
+import org.schwiebert.abl4j.util.ObjectPair;
 import org.schwiebert.abl4j.util.Pair;
 import org.schwiebert.abl4j.util.PropertiesMap;
 
@@ -130,7 +131,7 @@ public class TigerCorpusReader implements ITreebankReader {
 		List<Element> edges = nt.getChildren("edge");
 		String beginRef = edges.get(0).getAttributeValue("idref");
 		String endRef = edges.get(edges.size() - 1).getAttributeValue("idref");
-		Pair<String, String> pair = new Pair<String, String>(beginRef, endRef);
+		Pair<String, String> pair = new ObjectPair<String, String>(beginRef, endRef);
 		internalMapping.put(nt.getAttributeValue("id"), pair);
 		int begin = getWordIndex(beginRef, internalMapping, true);
 		int end = getWordIndex(endRef, internalMapping, false);
@@ -154,9 +155,9 @@ public class TigerCorpusReader implements ITreebankReader {
 		}
 		Pair<String, String> pair = (Pair<String, String>) found;
 		if (begin) {
-			return getWordIndex(pair.first, map, begin);
+			return getWordIndex(pair.getFirst(), map, begin);
 		} else {
-			return getWordIndex(pair.second, map, begin);
+			return getWordIndex(pair.getSecond(), map, begin);
 		}
 	}
 

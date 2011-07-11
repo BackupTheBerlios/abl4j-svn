@@ -28,7 +28,6 @@ import org.schwiebert.abl4j.util.Pair;
  * @author sschwieb
  * 
  */
-@SuppressWarnings("unchecked")
 public final class Phrase {
 
 	private static final long serialVersionUID = 8624865838792609484L;
@@ -44,7 +43,6 @@ public final class Phrase {
 	 * Returns <code>true</code> if <code>this.first</code> equals <code>obj.first</code> and 
 	 * <code>this.second</code> equals <code>obj.second</code>.
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
 	public boolean equals(Object obj) {
 		try {

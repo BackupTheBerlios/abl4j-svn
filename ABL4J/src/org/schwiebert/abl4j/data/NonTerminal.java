@@ -19,6 +19,7 @@
 package org.schwiebert.abl4j.data;
 
 import java.io.Serializable;
+import java.util.HashMap;
 
 /**
  * This class is used to store a nonterminal. Creating a nonterminal actually
@@ -35,21 +36,16 @@ import java.io.Serializable;
  *         (Java-Implementation)
  * 
  */
-public class NonTerminal implements Serializable, Comparable<NonTerminal> {
+public abstract class NonTerminal implements Serializable, Comparable<NonTerminal> {
 
 	private static final long serialVersionUID = 3264432434761762448L;
-
-	/**
-	 * the value of the nonterminal
-	 */
-	public final long value;
 		
-	private static class UpperNTBuffer {
+	protected static class UpperNTBuffer {
 		
 		long upperNT = 0;
 	}
 	
-	private static InheritableThreadLocal<UpperNTBuffer> upperNt = new InheritableThreadLocal<UpperNTBuffer>();
+	protected static InheritableThreadLocal<UpperNTBuffer> upperNt = new InheritableThreadLocal<UpperNTBuffer>();
 	
 	/**
 	 * Only required for testing purposes. Don't call this
@@ -57,35 +53,50 @@ public class NonTerminal implements Serializable, Comparable<NonTerminal> {
 	 */
 	public static void resetUpperNt() {
 		upperNt.set(new UpperNTBuffer());
-		ZERO_NON_TERMINAL =  new NonTerminal(0);
+		ZERO_NON_TERMINAL =  new IntNonTerminal(0);
 		upperNt.get().upperNT = 0;
 	}
 	
 	public static NonTerminal ZERO_NON_TERMINAL;
+	
+	public static NonTerminal newNonTerminal(long value) {
+		if(value < Integer.MAX_VALUE) {
+		return new IntNonTerminal(value);
+		} else {
+			return new LongNonTerminal(value);
+		}
+	}
+	
+	public static NonTerminal newNonTerminal() {
+		if(upperNt.get().upperNT < Integer.MAX_VALUE-1) {
+			return new IntNonTerminal();
+		}
+		return new LongNonTerminal();
+	}
 		
 	/**
 	 * Creates a new Nonterminal with value n.
 	 * @param n
 	 */
-	public NonTerminal(long n) {
-		this.value = n;
-		synchronized (NonTerminal.class) {
-			if (n >= upperNt.get().upperNT) {
-				upperNt.get().upperNT =n + 1;
-			}
-		}
-	}
-
-	/**
-	 * Creates a new Nonterminal whose value will be the
-	 * currently largest value.
-	 */
-	public NonTerminal() {
-		synchronized(upperNt) {
-			value = upperNt.get().upperNT + 1;
-			upperNt.get().upperNT = value;
-		}
-	}
+//	private NonTerminal(long n) {
+//		this.value = n;
+//		synchronized (NonTerminal.class) {
+//			if (n >= upperNt.get().upperNT) {
+//				upperNt.get().upperNT =n + 1;
+//			}
+//		}
+//	}
+//
+//	/**
+//	 * Creates a new Nonterminal whose value will be the
+//	 * currently largest value.
+//	 */
+//	private NonTerminal() {
+//		synchronized(upperNt) {
+//			value = upperNt.get().upperNT + 1;
+//			upperNt.get().upperNT = value;
+//		}
+//	}
 
 	/**
 	 * Returns true, if obj is an instanceof Nonterminal
@@ -94,16 +105,16 @@ public class NonTerminal implements Serializable, Comparable<NonTerminal> {
 	@Override
 	public boolean equals(Object obj) {
 		if (obj instanceof NonTerminal) {
-			return ((NonTerminal) obj).value == value;
+			return ((NonTerminal) obj).value() == value();
 		}
 		return false;
 	}
 	
 	
 
-	public int compareTo(NonTerminal arg0) {
-		if(arg0.value < value) return 1;
-		if(arg0.value > value) return -1;
+	public int compareTo(final NonTerminal arg0) {
+		if(arg0.value() < value()) return 1;
+		if(arg0.value() > value()) return -1;
 		return 0;
 	}
 
@@ -113,12 +124,14 @@ public class NonTerminal implements Serializable, Comparable<NonTerminal> {
 	 */
 	@Override
 	public int hashCode() {
-		return (int) (value ^ (value >>> 32));
+		return (int) (value() ^ (value() >>> 32));
 	}
 
 
 	public String toString() {
-		return "NT " + value;
+		return "NT " + value();
 	}
+	
+	public abstract long value();
 
 }

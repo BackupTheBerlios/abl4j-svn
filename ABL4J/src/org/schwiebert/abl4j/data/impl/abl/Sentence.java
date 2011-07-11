@@ -19,13 +19,14 @@
 package org.schwiebert.abl4j.data.impl.abl;
 
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import org.schwiebert.abl4j.data.ISentence;
 import org.schwiebert.abl4j.data.IWord;
+import org.schwiebert.abl4j.util.GoogleHashSet;
 
 /**
  * Represents a Sentence as a List of {@link IWord} objects.
@@ -56,6 +57,32 @@ public class Sentence<T> implements ISentence<T>, Serializable {
 	protected IWord<T>[] words;
 
 	
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + sentenceId;
+		result = prime * result + Arrays.hashCode(words);
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Sentence other = (Sentence) obj;
+		if (sentenceId != other.sentenceId)
+			return false;
+		if (!Arrays.equals(words, other.words))
+			return false;
+		return true;
+	}
+
 	public Sentence() {
 		
 	}
@@ -92,9 +119,12 @@ public class Sentence<T> implements ISentence<T>, Serializable {
 	 * @see org.schwiebert.abl4j.data.ISentence#registerWordsInSentence()
 	 */
 	public void registerWordsInSentence() {
-		final int size = size();
-		for (int i = 0; i < size; i++) {
-			get(i).addSentenceToWord((int)sentenceId);
+		Set<IWord<T>> allWords = new HashSet<IWord<T>>();
+		for (IWord<T> iWord : words) {
+			if(!allWords.contains(iWord)) {
+				iWord.addSentenceToWord(sentenceId);
+				allWords.add(iWord);
+			}
 		}
 	}
 
@@ -104,20 +134,25 @@ public class Sentence<T> implements ISentence<T>, Serializable {
 	@SuppressWarnings("unchecked")
 	public void buildSimilarSentencesSet() {
 		if(similars == null) {
-			similars = new HashSet<Integer>();
+			similars = new GoogleHashSet<Integer>();
 		}
 		final int size = size();
 		for (int i = 0; i < size; i++) {
 			IWord w = get(i);
 			List<Integer> v = w.getSentenceOccurrences();
 			final int occSize = v.size();
+			int start = -1;
 			for(int j = 0; j < occSize; j++) {
-				Integer id = v.get(j);
-//			for (Integer id : v) {
-				if (id > sentenceId) {
-					if (!similars.contains(id)) {
-						similars.add(id);
-					}
+				int sentence = v.get(j);
+				if(sentence == sentenceId) {
+					start = j+1;
+					break;
+				}
+			}
+			if(start >= 0 && start < occSize) {
+				for(int j = start; j < occSize; j++) {
+					Integer id = v.get(j);
+					similars.add(id);
 				}
 			}
 		}

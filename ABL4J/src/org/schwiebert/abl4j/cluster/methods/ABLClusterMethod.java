@@ -75,7 +75,7 @@ public class ABLClusterMethod implements ClusterMethod<AblNtMap>, MergeMethod<Ab
 	}
 	
 	private void findClustersInTree(ITree<?> t) {
-		NonTerminal ntNew = new NonTerminal();
+		NonTerminal ntNew = NonTerminal.newNonTerminal();
 		int treenr = 0;
 		logger.debug("Finding clusters " + treenr);
 		treenr++;

@@ -22,7 +22,6 @@ import java.io.Serializable;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.TreeMap;
 import java.util.Vector;
 
 /**
@@ -53,7 +52,6 @@ public class WordMapping<T> implements Serializable, IWordMapping<T> {
 	public WordMapping(Comparator<T> comparator) {
 		// TODO: Why TreeMap?
 		wordToIndex = new HashMap<T, Integer>();
-//		wordToIndex = new TreeMap<T, Integer>(comparator);
 	}
 
 	/* (non-Javadoc)

@@ -53,7 +53,7 @@ public class DemoAlignMethod implements AlignmentMethod {
 		// Create a constituent for each of these words:
 		for (IWord word : allWords) {
 			// New non terminal symbol
-			NonTerminal nt = new NonTerminal();
+			NonTerminal nt = NonTerminal.newNonTerminal();
 			int index = current.indexOf(word, 0);
 			// Create constituent
 			IConstituent demo2 = DataFactory.newConstituent(current, index, index+1);

@@ -40,7 +40,7 @@ public class LeftAlignmentMethod implements AlignmentMethod {
 		final int treeSize = current.size();
 		for (int i = 1; i != treeSize; ++i) {
 			IConstituent c = DataFactory.newConstituent(current, Math.min(i, end), Math.max(i, end));
-			c.add(new NonTerminal());
+			c.add(NonTerminal.newNonTerminal());
 			current.addStructure(c);
 		}
 

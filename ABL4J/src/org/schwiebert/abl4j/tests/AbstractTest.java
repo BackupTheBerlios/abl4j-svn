@@ -72,7 +72,7 @@ public abstract class AbstractTest {
 				runJavaProgram(args);
 				
 				long javaEnd = System.currentTimeMillis();
-				/*String ablCommand = cCmd + currentOpts;
+				String ablCommand = cCmd + currentOpts;
 				String cFileName = new File(outputDirectory, namePrefix + "_" + (counter < 100 ? 0 : "") + (counter < 10 ? 0 : "") + counter + "_c.txt").getAbsolutePath();
 				ablCommand += " -o " + cFileName;
 				long cppStart = System.currentTimeMillis();
@@ -85,9 +85,9 @@ public abstract class AbstractTest {
 				String errorMsg = "Compare Failed on Fileset: " + counter;
 				counter++;
 				assertTrue(errorMsg, compareFiles(jFileName, cFileName));
-				*/
+				
 				javaTime += (javaEnd - javaStart);
-				//cppTime += (cppEnd - cppStart);
+				cppTime += (cppEnd - cppStart);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -117,8 +117,8 @@ public abstract class AbstractTest {
 				if (!jString.startsWith("#")) {
 					if (jString.compareTo(cString) != 0) {
 						System.out.println("Not equal: ");
-						System.out.println(jString);
-						System.out.println(cString);
+						System.out.println("J: " + jString);
+						System.out.println("C: " + cString);
 						toReturn = false;
 					}
 				}

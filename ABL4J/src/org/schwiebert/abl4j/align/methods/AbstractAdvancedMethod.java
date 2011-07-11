@@ -33,6 +33,7 @@ import org.schwiebert.abl4j.distance.EditOperation;
 import org.schwiebert.abl4j.distance.EditOperation.SubDis;
 import org.schwiebert.abl4j.distance.EditOperation.Substitute;
 import org.schwiebert.abl4j.util.AblProperties;
+import org.schwiebert.abl4j.util.IntegerPair;
 import org.schwiebert.abl4j.util.Pair;
 import org.schwiebert.abl4j.util.PropertiesMap;
 
@@ -88,13 +89,13 @@ public abstract class AbstractAdvancedMethod implements AlignmentMethod {
 	protected final void handleEditOperationAlignment(final ITree t1, final ITree t2, final List<EditOperation> alignments) {
 
 		InsertMode currentMode = InsertMode.NONE, nextWord = InsertMode.NONE;
-		Pair<Integer, Integer> begin = new Pair<Integer, Integer>(0, 0);
-		Pair<Integer, Integer> current = new Pair<Integer, Integer>(0, 0);
+		Pair<Integer, Integer> begin = new IntegerPair(0,0);
+		Pair<Integer, Integer> current = new IntegerPair(0,0);
 		final int alignmentsSize = alignments.size();
 		for(int i = 0; i < alignmentsSize; i++) {
 			EditOperation operation = alignments.get(i);
 //		for (EditOperation operation : alignments) {
-			if ((operation instanceof SubDis || operation instanceof Substitute) && ((t1.get(current.first)).equals(t2.get(current.second)))) {
+			if ((operation instanceof SubDis || operation instanceof Substitute) && ((t1.get(current.getFirst())).equals(t2.get(current.getSecond())))) {
 				nextWord = InsertMode.SAME; // match
 			} else {
 				nextWord = InsertMode.DIFF;
@@ -103,8 +104,8 @@ public abstract class AbstractAdvancedMethod implements AlignmentMethod {
 				currentMode = nextWord;
 			}
 			if (currentMode != nextWord) { // handle hypothesis
-				IConstituent c1 = DataFactory.newConstituent(t1, begin.first, current.first);
-				IConstituent c2 = DataFactory.newConstituent(t2, begin.second, current.second);
+				IConstituent c1 = DataFactory.newConstituent(t1, begin.getFirst(), current.getFirst());
+				IConstituent c2 = DataFactory.newConstituent(t2, begin.getSecond(), current.getSecond());
 				if (((PART_TYPE == PartType.BOTH) || (PART_TYPE == PartType.EQUAL)) && (currentMode == InsertMode.SAME)) {
 					insertConstituents(t1, t2, c1, c2);
 				} else if (((PART_TYPE == PartType.BOTH) || (PART_TYPE == PartType.UNEQUAL)) && (currentMode == InsertMode.DIFF)) {
@@ -118,8 +119,8 @@ public abstract class AbstractAdvancedMethod implements AlignmentMethod {
 		// Handle hypotheses at the end of the sentence
 		if ((PART_TYPE == PartType.BOTH) || ((PART_TYPE == PartType.EQUAL) && (currentMode == InsertMode.SAME))
 				|| ((PART_TYPE == PartType.UNEQUAL) && (currentMode == InsertMode.DIFF))) {
-			final IConstituent c1 = DataFactory.newConstituent(t1, begin.first, t1.size());
-			final IConstituent c2 = DataFactory.newConstituent(t2, begin.second, t2.size());
+			final IConstituent c1 = DataFactory.newConstituent(t1, begin.getFirst(), t1.size());
+			final IConstituent c2 = DataFactory.newConstituent(t2, begin.getSecond(), t2.size());
 			insertConstituents(t1, t2, c1, c2);
 		}
 	}
@@ -145,7 +146,7 @@ public abstract class AbstractAdvancedMethod implements AlignmentMethod {
 					c1.add(c2pos.next().getFirst());
 					insertConstituent(t1, c1);
 				} else {
-					final NonTerminal n = new NonTerminal();
+					final NonTerminal n = NonTerminal.newNonTerminal();
 					c1.add(n);
 					c2.add(n);
 					insertConstituent(t1, c1);
@@ -153,7 +154,7 @@ public abstract class AbstractAdvancedMethod implements AlignmentMethod {
 				}
 			}
 		} else {
-			final NonTerminal n = new NonTerminal();
+			final NonTerminal n = NonTerminal.newNonTerminal();
 			c1.add(n);
 			c2.add(n);
 			insertConstituent(t1, c1);

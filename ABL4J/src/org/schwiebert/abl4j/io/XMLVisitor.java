@@ -89,7 +89,7 @@ public class XMLVisitor implements ISerializationVisitor {
 	public void visitNonTerminal(NonTerminal nonTerminal, boolean hasNext)
 			throws IOException {
 		Element nt = new Element(XmlConstants.EL_NT);
-		nt.setAttribute(XmlConstants.ATTR_ID,nonTerminal.value + "");
+		nt.setAttribute(XmlConstants.ATTR_ID,nonTerminal.value() + "");
 		currentNtList.addContent(nt);
 	}
 

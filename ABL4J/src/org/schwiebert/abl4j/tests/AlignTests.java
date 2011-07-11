@@ -89,7 +89,7 @@ public class AlignTests extends AbstractTest {
 	
 	
 	@Test
-	public void testT() throws IOException {
+	public void testR() throws IOException {
 		String[] align_opts = {"r"};
 		runAlignment(align_opts);
 		printExecTime();
@@ -97,9 +97,18 @@ public class AlignTests extends AbstractTest {
 		overallCppTime+= cppTime;
 	}
 	
+//	@Test
+//	public void testB() throws IOException {
+//		String[] align_opts = {"b"};
+//		runAlignment(align_opts);
+//		printExecTime();
+//		overallJavaTime+= javaTime;
+//		overallCppTime+= cppTime;
+//	}
+//	
 	@Test
-	public void testB() throws IOException {
-		String[] align_opts = {"b"};
+	public void testA() throws IOException {
+		String[] align_opts = {"a"};
 		runAlignment(align_opts);
 		printExecTime();
 		overallJavaTime+= javaTime;
@@ -107,8 +116,19 @@ public class AlignTests extends AbstractTest {
 	}
 	
 	@Test
-	public void testA() throws IOException {
-		String[] align_opts = {"a"};
+	public void testWM() throws IOException {
+		String[] align_opts = {"wm"};
+		startProfiling();
+		runAlignment(align_opts);
+		stopProfiling();
+		printExecTime();
+		overallJavaTime+= javaTime;
+		overallCppTime+= cppTime;
+	}
+	
+	@Test
+	public void testWB() throws IOException {
+		String[] align_opts = {"wb"};
 		runAlignment(align_opts);
 		printExecTime();
 		overallJavaTime+= javaTime;
@@ -141,25 +161,7 @@ public class AlignTests extends AbstractTest {
 		}
 	}
 	
-	@Test
-	public void testWM() throws IOException {
-		String[] align_opts = {"wm"};
-		startProfiling();
-		runAlignment(align_opts);
-		stopProfiling();
-		printExecTime();
-		overallJavaTime+= javaTime;
-		overallCppTime+= cppTime;
-	}
 	
-	@Test
-	public void testWB() throws IOException {
-		String[] align_opts = {"wb"};
-		runAlignment(align_opts);
-		printExecTime();
-		overallJavaTime+= javaTime;
-		overallCppTime+= cppTime;
-	}
 	
 	@AfterClass
 	public static void afterClass() {

@@ -196,7 +196,9 @@ public class TreeBank<T> extends ArrayList<ITree<T>> implements ITreeBank<T> {
 		return this;
 	}
 
-	
+	public void deleteTree(int index) {
+		super.remove(index);
+	}
 	
 	
 }

@@ -242,7 +242,7 @@ public class TreebankReader implements ITreebankReader {
 			nTString = nTString.trim();
 			if (nTString.length() > 0) {
 				Long ntValue = Long.parseLong(nTString);
-				NonTerminal nt = new NonTerminal(ntValue);
+				NonTerminal nt = NonTerminal.newNonTerminal(ntValue);
 				cons.add(nt);
 			}
 			nTString = "";

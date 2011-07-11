@@ -20,9 +20,7 @@ package org.schwiebert.abl4j.data;
 
 import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
 import java.util.Map;
-import java.util.SortedSet;
 
 import org.schwiebert.abl4j.data.impl.abl.Constituent;
 
@@ -135,12 +133,12 @@ public interface IConstituent<T> {
 	 */
 	public abstract void clear();
 
-	/**
-	 * Adds all NonTerminals.
-	 * @param nonTerminals
-	 * @return
-	 */
-	public abstract boolean addAllNonTerminals(Collection<NonTerminal> nonTerminals);
+//	/**
+//	 * Adds all NonTerminals.
+//	 * @param nonTerminals
+//	 * @return
+//	 */
+//	public abstract boolean addAllNonTerminals(Collection<NonTerminal> nonTerminals);
 
 	/**
 	 * Returns true if the given NonTerminal is already contained in the List of NonTerminals.
@@ -157,6 +155,6 @@ public interface IConstituent<T> {
 	 */
 	abstract void init(ISentence<T> sentence, int begin, int end);
 
-	public abstract SortedSet<NonTerminal> getNonTerminals();
+	public abstract Collection<NonTerminal> getNonTerminals();
 
 }

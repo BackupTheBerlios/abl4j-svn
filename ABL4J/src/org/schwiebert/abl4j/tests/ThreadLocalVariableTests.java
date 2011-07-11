@@ -45,18 +45,18 @@ public class ThreadLocalVariableTests {
 			Random rand1 = Tools.getRandom();
 			DataFactory.setMapping(new StringMapping());
 			mapping1 = DataFactory.getMapping();
-			assertTrue(new NonTerminal().value == 0);
-			assertTrue(new NonTerminal().value == 1);
+			assertTrue(NonTerminal.newNonTerminal().value() == 0);
+			assertTrue(NonTerminal.newNonTerminal().value() == 1);
 			sleepRandom(500);
 			Random rand2 = Tools.getRandom();
 			assertTrue(rand1 == rand2);
 			mapping2 = DataFactory.getMapping();
 			assertTrue(mapping1 == mapping2);
-			assertTrue(new NonTerminal().value == 2);
-			assertTrue(new NonTerminal().value == 3);
+			assertTrue(NonTerminal.newNonTerminal().value() == 2);
+			assertTrue(NonTerminal.newNonTerminal().value() == 3);
 			NonTerminal.resetUpperNt();
 			sleepRandom(500);
-			assertTrue(new NonTerminal().value == 0);
+			assertTrue(NonTerminal.newNonTerminal().value() == 0);
 		}
 		
 	}

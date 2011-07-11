@@ -186,7 +186,7 @@ public class SuffixTreeAlignment implements AlignmentMethod {
 	@SuppressWarnings("unchecked")
 	private void insertConstituentRaw(ITree t, int b, int e, int nt) {
 		IConstituent c = DataFactory.newConstituent(t, b, e);
-		c.add(new NonTerminal(nt));
+		c.add(NonTerminal.newNonTerminal(nt));
 		insertConstituent(t, c);
 	}
 

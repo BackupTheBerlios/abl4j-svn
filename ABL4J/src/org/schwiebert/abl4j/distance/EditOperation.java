@@ -22,6 +22,7 @@ import java.util.ArrayList;
 
 import org.schwiebert.abl4j.data.IWord;
 import org.schwiebert.abl4j.util.EditPair;
+import org.schwiebert.abl4j.util.IntegerPair;
 import org.schwiebert.abl4j.util.Pair;
 
 
@@ -69,11 +70,11 @@ public interface EditOperation {
 		}
 
 		public Pair<Integer, Integer> previousCoordinates(Pair<Integer, Integer> p) {
-			return new Pair<Integer, Integer>(p.first, p.second - 1);
+			return new IntegerPair(p.getFirst(), p.getSecond() - 1);
 		}
 
 		public Pair<Integer, Integer> nextCoordinates(Pair<Integer, Integer> p) {
-			return new Pair<Integer, Integer>(p.first, p.second + 1);
+			return new IntegerPair(p.getFirst(), p.getSecond() + 1);
 		}
 	}
 
@@ -93,11 +94,11 @@ public interface EditOperation {
 		}
 
 		public Pair<Integer, Integer> previousCoordinates(Pair<Integer, Integer> p) {
-			return new Pair<Integer, Integer>(p.first - 1, p.second);
+			return new IntegerPair(p.getFirst() - 1, p.getSecond());
 		}
 
 		public Pair<Integer, Integer> nextCoordinates(Pair<Integer, Integer> p) {
-			return new Pair<Integer, Integer>(p.first + 1, p.second);
+			return new IntegerPair(p.getFirst() + 1, p.getSecond());
 		}
 	}
 
@@ -116,10 +117,10 @@ public interface EditOperation {
 		}
 
 		public EditPair gamma(Pair<Integer, Integer> pair) {
-			if ((pair.first <= 0) || (pair.second <= 0))
+			if ((pair.getFirst() <= 0) || (pair.getSecond() <= 0))
 				return new EditPair(2F, this);
-			final IWord w1 = sentence1[begin1 + pair.first - 1];
-			final IWord w2 = sentence2[begin2 + pair.second - 1];
+			final IWord w1 = sentence1[begin1 + pair.getFirst() - 1];
+			final IWord w2 = sentence2[begin2 + pair.getSecond() - 1];
 			if (w1.equals(w2)) {
 				return new EditPair(0F, this);
 			}
@@ -127,15 +128,15 @@ public interface EditOperation {
 		}
 
 		public Pair<Integer, Integer> previousCoordinates(Pair<Integer, Integer> p) {
-			return new Pair<Integer, Integer>(p.first - 1, p.second - 1);
+			return new IntegerPair(p.getFirst() - 1, p.getSecond() - 1);
 		}
 
 		public Pair<Integer, Integer> nextCoordinates(Pair<Integer, Integer> p) {
-			return new Pair<Integer, Integer>(p.first + 1, p.second + 1);
+			return new IntegerPair(p.getFirst() + 1, p.getSecond() + 1);
 		}
 
 		boolean match(Pair<Integer, Integer> p) {
-			return (sentence1[begin1 + p.first - 1].equals(sentence2[begin2 + p.second - 1]));
+			return (sentence1[begin1 + p.getFirst() - 1].equals(sentence2[begin2 + p.getSecond() - 1]));
 		}
 
 	}
@@ -160,11 +161,11 @@ public interface EditOperation {
 		 * mat=((index_S/|S|)-(index_T/|T|))*mean(|S|,|T|)
 		 */
 		public EditPair gamma(Pair<Integer, Integer> pair) {
-			if ((pair.first <= 0) || (pair.second <= 0))
+			if ((pair.getFirst() <= 0) || (pair.getSecond() <= 0))
 				return new EditPair(2F, this);
-			if (sentence1[begin1 + pair.first - 1].equals(sentence2[begin2 + pair.second - 1])) {
-				float f = pair.first;
-				float s = pair.second;
+			if (sentence1[begin1 + pair.getFirst() - 1].equals(sentence2[begin2 + pair.getSecond() - 1])) {
+				float f = pair.getFirst();
+				float s = pair.getSecond();
 				float value = (Math.abs((float) ((f - 1) / len1) - (float) ((s - 1) / len2)) * (len1 + len2) / 2f);
 				return new EditPair(value, this);
 			}
