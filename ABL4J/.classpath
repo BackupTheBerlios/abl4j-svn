@@ -7,8 +7,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry exported="true" kind="lib" path="lib/guessEncoding.jar"/>
-	<classpathentry kind="lib" path="lib/profile.jar"/>
-	<classpathentry kind="lib" path="lib/tesla.cache.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry exported="true" kind="lib" path="lib/log4j-1.2.15.jar" sourcepath="/Volumes/Daten/stephan/.m2/repository/log4j/log4j/1.2.15/log4j-1.2.15-sources.jar">
 		<attributes>
