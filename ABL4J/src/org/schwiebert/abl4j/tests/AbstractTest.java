@@ -27,8 +27,30 @@ import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import junit.framework.Assert;
 
 import org.apache.log4j.Logger;
+import org.schwiebert.abl4j.InvalidConfigurationException;
+import org.schwiebert.abl4j.data.DataFactory;
+import org.schwiebert.abl4j.data.IConstituent;
+import org.schwiebert.abl4j.data.ITree;
+import org.schwiebert.abl4j.data.ITreeBank;
+import org.schwiebert.abl4j.data.IWord;
+import org.schwiebert.abl4j.data.NonTerminal;
+import org.schwiebert.abl4j.data.impl.abl.TreeBank;
+import org.schwiebert.abl4j.io.IOFactory;
+import org.schwiebert.abl4j.io.ITreebankReader;
+import org.schwiebert.abl4j.io.NoReaderAvailableException;
+import org.schwiebert.abl4j.io.TreebankReader;
+import org.schwiebert.abl4j.util.ABLInitializer;
+import org.schwiebert.abl4j.util.AblProperties;
+import org.schwiebert.abl4j.util.PropertiesMap;
 
 public abstract class AbstractTest {
 	
@@ -98,6 +120,86 @@ public abstract class AbstractTest {
 	protected abstract void runJavaProgram(String[] args) throws IOException;
 
 
+	public boolean compareTreeBanks(String fileName, String fileName2) {
+		PropertiesMap pm = new PropertiesMap(new ABLInitializer());
+		pm.setProperty(AblProperties.INPUT_FILE, fileName);
+		pm.setProperty(AblProperties.INPUT_ENCODING, "UTF-8");
+		TreebankReader reader = new TreebankReader();
+		ITreeBank tb1 = DataFactory.newTreeBank();
+		ITreeBank tb2 = DataFactory.newTreeBank();
+		try {
+			reader.configure(pm);
+			reader.readTreebank(tb1);
+			
+			pm.setProperty(AblProperties.INPUT_FILE, fileName2);
+			reader.configure(pm);
+			reader.readTreebank(tb2);
+			compareTreebanks(tb1, tb2);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		} catch (InvalidConfigurationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return true;
+		
+	}
+
+	private void compareTreebanks(ITreeBank tb1, ITreeBank tb2) {
+		Assert.assertEquals(tb1.size(), tb2.size());
+		Assert.assertEquals(tb1.getNumberOfConstituents(), tb2.getNumberOfConstituents());
+		Map<NonTerminal, Integer> tb1Map = new HashMap<NonTerminal, Integer>();
+		Map<NonTerminal, Integer> tb2Map = new HashMap<NonTerminal, Integer>();
+		for(int i = 0; i < tb1.size(); i++) {
+			ITree t1 = tb1.get(i);
+			ITree t2 = tb2.get(i);
+			Assert.assertEquals(t1.size(), t2.size());
+			for(int j = 0; j < t1.size(); j++) {
+				IWord w1 = t1.get(j);
+				IWord w2 = t2.get(j);
+				Assert.assertEquals(w1.getIndex(), w2.getIndex());
+			}
+			List<IConstituent<?>> cs1 = t1.getConstituentStructure();
+			List<IConstituent<?>> cs2 = t2.getConstituentStructure();
+			Assert.assertEquals(cs1.size(), cs2.size());
+			compareConstituents(tb1Map, tb2Map, cs1, cs2);
+		}
+	}
+
+	protected void compareConstituents(Map<NonTerminal, Integer> tb1Map,
+			Map<NonTerminal, Integer> tb2Map, List<IConstituent<?>> cs1,
+			List<IConstituent<?>> cs2) {
+		for(int j = 0; j < cs1.size(); j++) {
+			IConstituent<?> c1 = cs1.get(j);
+			IConstituent<?> c2 = cs2.get(j);
+			Assert.assertEquals(c1.getBeginIndex(), c2.getBeginIndex());
+			Assert.assertEquals(c1.getEndIndex(), c2.getEndIndex());
+			Collection<NonTerminal> nts1 = c1.getNonTerminals();
+			Collection<NonTerminal> nts2 = c2.getNonTerminals();
+			List<Integer> map1 = new ArrayList<Integer>();
+			for (NonTerminal nt : nts1) {
+				Integer value = tb1Map.get(nt);
+				if(value == null) {
+					value = tb1Map.size();
+					tb1Map.put(nt, value);
+				}
+				map1.add(value);
+			}
+			List<Integer> map2 = new ArrayList<Integer>();
+			for (NonTerminal nt : nts2) {
+				Integer value = tb2Map.get(nt);
+				if(value == null) {
+					value = tb2Map.size();
+					tb2Map.put(nt, value);
+				}
+				map2.add(value);
+			}
+			Assert.assertEquals(map1, map2);
+		}
+	}
+	
 	public boolean compareFiles(String fileName, String fileName2) throws IOException {
 		//if(true) return true;
 		BufferedReader j = new BufferedReader(new InputStreamReader(new FileInputStream(fileName),"UTF-8"));

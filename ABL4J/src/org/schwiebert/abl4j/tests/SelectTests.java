@@ -21,9 +21,13 @@ package org.schwiebert.abl4j.tests;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
+import java.util.List;
+import java.util.Map;
 
 import org.junit.AfterClass;
 import org.junit.Test;
+import org.schwiebert.abl4j.data.IConstituent;
+import org.schwiebert.abl4j.data.NonTerminal;
 import org.schwiebert.abl4j.select.Main;
 
 
@@ -85,5 +89,20 @@ public class SelectTests extends AbstractTest {
 		System.out.println("Total C++ Time : " + overallCppTime);
 		System.out.println("(Please note that C++ version would probably be executed faster if not called from java code.)");
 	}
+
+	@Override
+	protected void compareConstituents(Map<NonTerminal, Integer> tb1Map,
+			Map<NonTerminal, Integer> tb2Map, List<IConstituent<?>> cs1,
+			List<IConstituent<?>> cs2) {
+		
+	}
+
+	@Override
+	public boolean compareFiles(String fileName, String fileName2)
+			throws IOException {
+		return super.compareTreeBanks(fileName, fileName2);
+	}
+	
+	
 	
 }

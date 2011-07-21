@@ -49,12 +49,14 @@ public class OverlapInTree implements Predicate<IConstituent<?>> {
 
 	public boolean matches(IConstituent<?> current) {
 		for (IConstituent<?> i : base.getConstituentStructure()) {
-			if (((i.getBeginIndex() < current.getBeginIndex()) && (current.getBeginIndex() < i.getEndIndex()) && (i
-					.getEndIndex() < current.getEndIndex()))
-					|| ((current.getBeginIndex() < i.getBeginIndex())
-							&& (i.getBeginIndex() < current.getEndIndex()) && (current.getEndIndex() < i.getEndIndex()
+			int currentBegin = current.getBeginIndex();
+			int currentEnd = current.getEndIndex();
+			if (((i.getBeginIndex() < currentBegin) && (currentBegin < i.getEndIndex()) && (i
+					.getEndIndex() < currentEnd))
+					|| ((currentBegin < i.getBeginIndex())
+							&& (i.getBeginIndex() < currentEnd) && (currentEnd < i.getEndIndex()
 							))) {
-				return true;
+			return true;
 			}
 		}
 		return false;

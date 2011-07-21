@@ -123,17 +123,6 @@ public abstract class AbstractSelectMethod implements SelectMethod {
 	}
 
 	private void selectProbabilityInTree(ITree t, ProbabilityStore store) {
-//		KnowledgeBase known = new KnowledgeBase();
-//		Vector<IConstituent<?>> overlap = new Vector<IConstituent<?>>();
-//		Tools.removeCopyIf(t, overlap);
-//		List<IConstituent> toRemove = Tools.removeIf(t.getConstituentStructure(), 0, t.getConstituentStructure().size(), new OverlapInTree(t));
-//		for (IConstituent constituent : toRemove) {
-//			t.getConstituentStructure().remove(constituent);
-//		}
-//		Vector<IConstituent<?>> res = selectProbabilityInRange(t, overlap, 0, t.size(), known, store);
-//		for (IConstituent<?> c : res) {
-//			t.addStructure(c);
-//		}
 		KnowledgeBase known = new KnowledgeBase();
 		Vector<IConstituent<?>> overlap = new Vector<IConstituent<?>>();
 		Tools.removeCopyIf(t, overlap);
@@ -241,9 +230,9 @@ public abstract class AbstractSelectMethod implements SelectMethod {
 			boundary++;
 		}
 		Vector<Vector<IConstituent<?>>> new_best = new Vector<Vector<IConstituent<?>>>();
-		final int size = new_best.size();
+		final int size = n_best.size();
 		for(int j = 0; j < size; j++) {
-			Vector<IConstituent<?>> i = new_best.get(j);
+			Vector<IConstituent<?>> i = n_best.get(j);
 			if (i.size() == maxSize) {
 				new_best.add(i);
 			}

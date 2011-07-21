@@ -222,17 +222,10 @@ public class Constituent<T> implements IConstituent<T>, Serializable {
 	 * @see org.schwiebert.abl4j.data.IConstituent#indexOf(org.schwiebert.abl4j.data.NonTerminal)
 	 */
 	public boolean contains(NonTerminal n) {
-		return Collections.binarySearch(nts, n) > 0;
-		//return nts.contains(n);
+		//return Collections.binarySearch(nts, n) > 0;
+		return nts.contains(n);
 	}
 
-//	/*
-//	 * (non-Javadoc)
-//	 * @see org.schwiebert.abl4j.data.IConstituent#addAllNonTerminals(java.util.Collection)
-//	 */
-//	public boolean addAllNonTerminals(Collection<NonTerminal> nonTerminals) {
-//		return nts.addAll(nonTerminals);
-//	}
 
 	public int size() {
 		return nts.size();
@@ -245,11 +238,6 @@ public class Constituent<T> implements IConstituent<T>, Serializable {
 			return true;
 		} 
 		return false;
-//		int position = Collections.binarySearch(nts, n);			
-//		if(position >= 0) return false;
-//		nts.add(n);
-//		nts.add(-position-1, n);
-//		return true;
 	}
 
 	public void clear() {
@@ -258,13 +246,15 @@ public class Constituent<T> implements IConstituent<T>, Serializable {
 
 	public NonTerminal getFirst() {
 		return nts.get(0);
-		// FIXME: This does not return the first, but any!
-	//	return nts.iterator().next();
 	}
 
 	public Collection<NonTerminal> getNonTerminals() {
 		return nts;
 	}
 
+	@Override
+	public String toString() {
+		return "(" + begin + ", " + end + "[" + nts + "])";
+	}
 	
 }

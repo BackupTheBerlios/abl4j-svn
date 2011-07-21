@@ -106,14 +106,14 @@ public class AlignTests extends AbstractTest {
 //		overallCppTime+= cppTime;
 //	}
 //	
-	@Test
-	public void testA() throws IOException {
-		String[] align_opts = {"a"};
-		runAlignment(align_opts);
-		printExecTime();
-		overallJavaTime+= javaTime;
-		overallCppTime+= cppTime;
-	}
+//	@Test
+//	public void testA() throws IOException {
+//		String[] align_opts = {"a"};
+//		runAlignment(align_opts);
+//		printExecTime();
+//		overallJavaTime+= javaTime;
+//		overallCppTime+= cppTime;
+//	}
 	
 	@Test
 	public void testWM() throws IOException {
