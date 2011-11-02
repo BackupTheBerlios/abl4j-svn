@@ -90,8 +90,7 @@ public class Align implements IAblComponent {
 		logger.info("Align completed");
 	}
 	
-	public ITree process(ITreeBank tb) {
-		final ITree<?> current = tb.get(0);
+	public ITree process(ITree current, ITreeBank tb) {
 		// start symbol
 		IConstituent c = DataFactory.newConstituent(current, 0, current.size());
 		//c.setLocalScore(0, 0);
@@ -102,7 +101,6 @@ public class Align implements IAblComponent {
 			current.buildSimilarSentencesSet();
 		}
 		alignmentMethod.handleEditOperationStructure(tb, current);
-		tb.deleteTree(0);
 		return current;
 	}
 
