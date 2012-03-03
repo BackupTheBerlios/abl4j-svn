@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editmodel:ClassDiagramEditModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:editmodel="editmodel.xmi" xmlns:options="options.xmi" size="1392,586" id="org.schwiebert.abl4j.select.method" metadata="uml2-1.0" initialized="true" scrolledY="106" tag="1000" key="32303037303533312D313030302041424C344A2F7374657068616E">
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.1/@sourceConnections.0" name="AbstractSelectMethod" location="246,195" size="161,218" id="org.schwiebert.abl4j.select.method/AbstractSelectMethod" runTimeClassModel="computeCombinedProbability(Lorg.schwiebert.abl4j.data.ITree;Ljava.util.Vector;Lorg.schwiebert.abl4j.select.ProbabilityStore;),org.schwiebert.abl4j.select.method.AbstractSelectMethod.SelectThread,select(Lorg.schwiebert.abl4j.data.ITreeBank;),createPhrase(Lorg.schwiebert.abl4j.data.ITree;Lorg.schwiebert.abl4j.data.IConstituent;I),configure(Ljava.util.Properties;)">
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="138,72">
+      <children xsi:type="editmodel:MethodEditModel" name="computeCombinedProbability" id="org.schwiebert.abl4j.select.method/AbstractSelectMethod#computeCombinedProbability(Lorg.schwiebert.abl4j.data.ITree;Ljava.util.Vector;Lorg.schwiebert.abl4j.select.ProbabilityStore;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="configure" id="org.schwiebert.abl4j.select.method/AbstractSelectMethod#configure(Ljava.util.Properties;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="createPhrase" id="org.schwiebert.abl4j.select.method/AbstractSelectMethod#createPhrase(Lorg.schwiebert.abl4j.data.ITree;Lorg.schwiebert.abl4j.data.IConstituent;I)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="select" id="org.schwiebert.abl4j.select.method/AbstractSelectMethod#select(Lorg.schwiebert.abl4j.data.ITreeBank;)"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="110,87">
+      <children xsi:type="editmodel:ClassEditModel" name="SelectThread" size="110,85" id="org.schwiebert.abl4j.select.method/AbstractSelectMethod$SelectThread" runTimeClassModel="SelectThread(Lorg.schwiebert.abl4j.data.ITreeBank;Lorg.schwiebert.abl4j.select.ProbabilityStore;I),run()">
+        <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+        <children xsi:type="editmodel:CompartmentEditModel" size="74,36">
+          <children xsi:type="editmodel:MethodEditModel" name="SelectThread" id="org.schwiebert.abl4j.select.method/AbstractSelectMethod$SelectThread#SelectThread(Lorg.schwiebert.abl4j.data.ITreeBank;Lorg.schwiebert.abl4j.select.ProbabilityStore;I)"/>
+          <children xsi:type="editmodel:MethodEditModel" name="run" id="org.schwiebert.abl4j.select.method/AbstractSelectMethod$SelectThread#run()"/>
+        </children>
+        <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+        <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+      </children>
+    </children>
+    <sourceConnections xsi:type="editmodel:GeneralizationEditModel" autoLocated="true" id="org.schwiebert.abl4j.select.method/SelectMethod&lt;-org.schwiebert.abl4j.select.method/AbstractSelectMethod" source="//@children.0" target="//@children.2" targetEnd="//@children.0/@sourceConnections.0/@children.1" sourceEnd="//@children.0/@sourceConnections.0/@children.0" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:AssociationEndEditModel" location="80,0" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="55,95"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" name="TermsSelectMethod" location="50,463" size="161,85" id="org.schwiebert.abl4j.select.method/TermsSelectMethod" runTimeClassModel="computeCombinedProbability(Lorg.schwiebert.abl4j.data.ITree;Ljava.util.Vector;Lorg.schwiebert.abl4j.select.ProbabilityStore;),createPhrase(Lorg.schwiebert.abl4j.data.ITree;Lorg.schwiebert.abl4j.data.IConstituent;I)">
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="138,36">
+      <children xsi:type="editmodel:MethodEditModel" name="computeCombinedProbability" id="org.schwiebert.abl4j.select.method/TermsSelectMethod#computeCombinedProbability(Lorg.schwiebert.abl4j.data.ITree;Ljava.util.Vector;Lorg.schwiebert.abl4j.select.ProbabilityStore;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="createPhrase" id="org.schwiebert.abl4j.select.method/TermsSelectMethod#createPhrase(Lorg.schwiebert.abl4j.data.ITree;Lorg.schwiebert.abl4j.data.IConstituent;I)"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <sourceConnections xsi:type="editmodel:GeneralizationEditModel" targetConnections="//@children.4/@sourceConnections.0 //@children.3/@sourceConnections.0" autoLocated="true" id="org.schwiebert.abl4j.select.method/AbstractSelectMethod&lt;-org.schwiebert.abl4j.select.method/TermsSelectMethod" source="//@children.1" target="//@children.0" targetEnd="//@children.1/@sourceConnections.0/@children.1" sourceEnd="//@children.1/@sourceConnections.0/@children.0" connectionRouterKind="GeneralizationManhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" location="80,0" anchorKind="FixedAtEdge" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="80,218" anchorKind="FixedAtEdge"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:InterfaceEditModel" targetConnections="//@children.0/@sourceConnections.0" name="SelectMethod" location="271,50" size="111,95" id="org.schwiebert.abl4j.select.method/SelectMethod" runTimeClassModel="select(Lorg.schwiebert.abl4j.data.ITreeBank;),configure(Ljava.util.Properties;)">
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="63,36">
+      <children xsi:type="editmodel:MethodEditModel" name="configure" id="org.schwiebert.abl4j.select.method/SelectMethod#configure(Ljava.util.Properties;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="select" id="org.schwiebert.abl4j.select.method/SelectMethod#select(Lorg.schwiebert.abl4j.data.ITreeBank;)"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" name="FirstSelectMethod" location="443,463" size="161,103" id="org.schwiebert.abl4j.select.method/FirstSelectMethod" runTimeClassModel="computeCombinedProbability(Lorg.schwiebert.abl4j.data.ITree;Ljava.util.Vector;Lorg.schwiebert.abl4j.select.ProbabilityStore;),select(Lorg.schwiebert.abl4j.data.ITreeBank;),createPhrase(Lorg.schwiebert.abl4j.data.ITree;Lorg.schwiebert.abl4j.data.IConstituent;I)">
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="138,54">
+      <children xsi:type="editmodel:MethodEditModel" name="computeCombinedProbability" id="org.schwiebert.abl4j.select.method/FirstSelectMethod#computeCombinedProbability(Lorg.schwiebert.abl4j.data.ITree;Ljava.util.Vector;Lorg.schwiebert.abl4j.select.ProbabilityStore;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="createPhrase" id="org.schwiebert.abl4j.select.method/FirstSelectMethod#createPhrase(Lorg.schwiebert.abl4j.data.ITree;Lorg.schwiebert.abl4j.data.IConstituent;I)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="select" id="org.schwiebert.abl4j.select.method/FirstSelectMethod#select(Lorg.schwiebert.abl4j.data.ITreeBank;)"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <sourceConnections xsi:type="editmodel:GeneralizationEditModel" autoLocated="true" id="org.schwiebert.abl4j.select.method/AbstractSelectMethod&lt;-org.schwiebert.abl4j.select.method/FirstSelectMethod" source="//@children.3" target="//@children.1/@sourceConnections.0" targetEnd="//@children.3/@sourceConnections.0/@children.1" sourceEnd="//@children.3/@sourceConnections.0/@children.0" connectionRouterKind="GeneralizationManhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" location="80,0" anchorKind="FixedAtEdge" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" name="ConstituentSelectMethod" location="241,463" size="172,85" id="org.schwiebert.abl4j.select.method/ConstituentSelectMethod" runTimeClassModel="computeCombinedProbability(Lorg.schwiebert.abl4j.data.ITree;Ljava.util.Vector;Lorg.schwiebert.abl4j.select.ProbabilityStore;),createPhrase(Lorg.schwiebert.abl4j.data.ITree;Lorg.schwiebert.abl4j.data.IConstituent;I)">
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="138,36">
+      <children xsi:type="editmodel:MethodEditModel" name="computeCombinedProbability" id="org.schwiebert.abl4j.select.method/ConstituentSelectMethod#computeCombinedProbability(Lorg.schwiebert.abl4j.data.ITree;Ljava.util.Vector;Lorg.schwiebert.abl4j.select.ProbabilityStore;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="createPhrase" id="org.schwiebert.abl4j.select.method/ConstituentSelectMethod#createPhrase(Lorg.schwiebert.abl4j.data.ITree;Lorg.schwiebert.abl4j.data.IConstituent;I)"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <sourceConnections xsi:type="editmodel:GeneralizationEditModel" autoLocated="true" id="org.schwiebert.abl4j.select.method/AbstractSelectMethod&lt;-org.schwiebert.abl4j.select.method/ConstituentSelectMethod" source="//@children.4" target="//@children.1/@sourceConnections.0" targetEnd="//@children.4/@sourceConnections.0/@children.1" sourceEnd="//@children.4/@sourceConnections.0/@children.0" connectionRouterKind="GeneralizationManhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" location="86,0" anchorKind="FixedAtEdge" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <diagramOptions xsi:type="options:ClassDiagramOptions" properties="wireOptions=1;Product=eUML2" autoName="false"/>
+  <boardSetting snapToGeometry="true" gridEnabled="true" gridSpacing="15,15" gridOrigin="0,0" rulerUnit="pixel" gridVisibility="false">
+    <leftRuler/>
+    <topRuler/>
+  </boardSetting>
+  <classDiagramPreferences xsi:type="editmodel:UMLClassDiagramPreference" showPopupBars="true" showConnectionHandles="true" attributeSorter="Natural" methodSorter="Natural" showClassStereotype="true" showPackageStereotype="true" showDependencyStereotype="true" showInterfaceStereotype="true" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+</editmodel:ClassDiagramEditModel>
